@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header" role="banner">
+    <div class="container">
+        <h1 class="page-title">Blog & Insights</h1>
+        <p class="page-subtitle">Data-driven insights on product leadership, AI strategy, and organizational transformation</p>
+    </div>
+</section>
+
+<!-- Blog Filters -->
+<section class="blog-filters" role="region" aria-labelledby="filters-title">
+    <div class="container">
+        <h2 id="filters-title" class="sr-only">Filter Posts</h2>
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="year-filter" class="filter-label">Year:</label>
+                <div class="filter-options" id="year-filter">
+                    {% for year in filter_options.years %}
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="{{ year }}" data-filter="year" checked>
+                        <span>{{ year }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="format-filter" class="filter-label">Content Format:</label>
+                <div class="filter-options" id="format-filter">
+                    {% for format in filter_options.content_formats %}
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="{{ format }}" data-filter="format" checked>
+                        <span>{{ format }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="theme-filter" class="filter-label">Theme:</label>
+                <div class="filter-options" id="theme-filter">
+                    {% for theme in filter_options.themes %}
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="{{ theme }}" data-filter="theme" checked>
+                        <span>{{ theme }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="clear-filters" class="btn btn-secondary">Clear All</button>
+                <button id="select-all-filters" class="btn btn-secondary">Select All</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Posts -->
+<section class="blog-posts" role="region" aria-labelledby="posts-title">
+    <div class="container">
+        <div class="posts-header">
+            <h2 id="posts-title" class="section-title">Professional Insights</h2>
+            <div class="posts-count">
+                <span id="visible-count">{{ posts|length }}</span> of {{ posts|length }} posts
+            </div>
+        </div>
+
+        <div class="blog-posts-grid" id="posts-container">
+            {% for post in posts %}
+            <article class="blog-post"
+                     data-year="{{ post.creation_date[:4] }}"
+                     data-formats="{{ post.content_format|join(',') }}"
+                     data-themes="{{ post.themes|join(',') }}">
+                <header class="post-header">
+                    <div class="post-meta">
+                        <time datetime="{{ post.creation_date }}">
+                            {% set date_parts = post.creation_date.split('-') %}
+                            {% set months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
+                            {{ date_parts[2]|int }} {{ months[date_parts[1]|int] }} {{ date_parts[0] }}
+                        </time>
+                        <span class="post-read-time">{{ post.read_time }}</span>
+                    </div>
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-excerpt">{{ post.excerpt }}</p>
+                </header>
+
+                <div class="post-tags">
+                    <div class="content-formats">
+                        {% for format in post.content_format %}
+                        <span class="tag format-tag">{{ format }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="themes">
+                        {% for theme in post.themes %}
+                        <span class="tag theme-tag">{{ theme }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="post-actions">
+                    <button class="read-more-btn" data-post-id="{{ post.id }}">
+                        Read Full Article
+                    </button>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div id="no-results" class="no-results" style="display: none;">
+            <h3>No posts match your filters</h3>
+            <p>Try adjusting your filter criteria to see more content.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Post Modal -->
+<div id="post-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title" class="modal-post-title"></h2>
+            <button class="modal-close" aria-label="Close article">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-meta">
+                <time class="modal-date"></time>
+                <span class="modal-read-time"></span>
+                <div class="modal-tags"></div>
+            </div>
+            <div class="modal-content-body"></div>
+        </div>
+    </div>
+</div>
+
+<section class="topics" role="region" aria-labelledby="topics-title">
+    <div class="container">
+        <h2 id="topics-title" class="section-title">Topics I Write About</h2>
+        <div class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>Leadership & Management</h3>
+                <p>Building and scaling high-performing engineering teams, managing technical debt, and fostering innovation culture.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </div>
+                <h3>Technology & Architecture</h3>
+                <p>Modern software architecture, cloud infrastructure, DevOps practices, and emerging technology trends.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
+                    </svg>
+                </div>
+                <h3>Career Development</h3>
+                <p>Growing from individual contributor to technical leader, mentoring strategies, and building technical expertise.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                    </svg>
+                </div>
+                <h3>Industry Insights</h3>
+                <p>Digital transformation trends, startup vs enterprise culture, and the future of software development.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter" role="region" aria-labelledby="newsletter-title">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2 id="newsletter-title">Stay Connected</h2>
+            <p>
+                Follow my latest thoughts and insights on leadership and technology.
+                Connect with me on LinkedIn for regular updates and professional discussions.
+            </p>
+            <div class="newsletter-actions">
+                <a href="{{ config.social.linkedin }}" class="btn btn-primary" target="_blank" rel="noopener">
+                    Follow on LinkedIn
+                </a>
+                <a href="/contact" class="btn btn-secondary">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LinkedIn Integration Script Placeholder -->
+<script>
+// Placeholder for LinkedIn API integration
+// This would be replaced with actual LinkedIn API calls or RSS feed parsing
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Future: Implement LinkedIn post fetching
+    console.log('LinkedIn integration ready for implementation');
+});
+
+// Function to dynamically load LinkedIn posts (placeholder)
+async function loadLinkedInPosts() {
+    // This would connect to LinkedIn API or RSS feed
+    // For now, we're using static content
+    console.log('LinkedIn posts loaded (placeholder)');
+}
+</script>
+{% endblock %}

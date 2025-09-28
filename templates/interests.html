@@ -1,0 +1,683 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header" role="banner">
+    <div class="container">
+        <h1 class="page-title">Leadership Philosophy & Values</h1>
+        <p class="page-subtitle">The executive mindset driving $650M+ revenue generation and global team excellence</p>
+    </div>
+</section>
+
+<section class="mission-statement" role="region" aria-labelledby="mission-title">
+    <div class="container">
+        <div class="mission-content">
+            <h2 id="mission-title">Professional Mission</h2>
+            <blockquote class="mission-quote">
+                "{{ motivations.professional_mission }}"
+            </blockquote>
+
+            <div class="foundational-principle">
+                <h3>Foundational Principle</h3>
+                <blockquote class="principle-quote">
+                    "{{ motivations.foundational_principle }}"
+                </blockquote>
+            </div>
+
+            <p class="mission-driver">
+                <strong>Primary Driver:</strong> {{ motivations.primary_driver }}
+            </p>
+
+            <div class="personal-journey">
+                <h3>Personal Evolution</h3>
+                <p class="journey-text">{{ motivations.personal_evolution }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="interests-grid-section" role="region" aria-labelledby="interests-title">
+    <div class="container">
+        <h2 id="interests-title" class="section-title">Areas of Passion</h2>
+
+        {% for interest_category in interests %}
+        <div class="interest-category">
+            <h3 class="category-title">{{ interest_category.category }}</h3>
+            <div class="interests-grid">
+                {% for item in interest_category['items'] %}
+                <div class="interest-card">
+                    <div class="interest-icon">{{ item.icon }}</div>
+                    <h4 class="interest-title">{{ item.title }}</h4>
+                    <p class="interest-description">{{ item.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="core-beliefs" role="region" aria-labelledby="beliefs-title">
+    <div class="container">
+        <h2 id="beliefs-title" class="section-title">Core Beliefs</h2>
+        <div class="beliefs-grid">
+            {% for belief in motivations.core_beliefs %}
+            <div class="belief-card">
+                <div class="belief-icon">💭</div>
+                <p class="belief-text">{{ belief }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="values-section" role="region" aria-labelledby="values-title">
+    <div class="container">
+        <h2 id="values-title" class="section-title">Guiding Values</h2>
+        <div class="values-timeline">
+            {% for value in values %}
+            <div class="value-item">
+                <div class="value-marker"></div>
+                <div class="value-content">
+                    <h3 class="value-title">{{ value.title }}</h3>
+                    <p class="value-description">{{ value.description }}</p>
+                    <div class="value-application">
+                        <strong>In Practice:</strong> {{ value.application }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="energizers" role="region" aria-labelledby="energy-title">
+    <div class="container">
+        <h2 id="energy-title" class="section-title">What Energizes Me</h2>
+        <div class="energizers-list">
+            {% for energizer in motivations.what_energizes_me %}
+            <div class="energizer-item">
+                <div class="energizer-bullet">⚡</div>
+                <p class="energizer-text">{{ energizer }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="goals-section" role="region" aria-labelledby="goals-title">
+    <div class="container">
+        <h2 id="goals-title" class="section-title">Future Aspirations</h2>
+
+        <div class="goals-container">
+            <div class="goals-column">
+                <h3>Short-Term Goals (2024-2025)</h3>
+                <div class="goals-list">
+                    {% for goal in goals.short_term %}
+                    <div class="goal-card">
+                        <h4 class="goal-title">{{ goal.title }}</h4>
+                        <p class="goal-description">{{ goal.description }}</p>
+                        <span class="goal-timeline">{{ goal.timeline }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="goals-column">
+                <h3>Long-Term Vision (2025-2030)</h3>
+                <div class="goals-list">
+                    {% for goal in goals.long_term %}
+                    <div class="goal-card">
+                        <h4 class="goal-title">{{ goal.title }}</h4>
+                        <p class="goal-description">{{ goal.description }}</p>
+                        <span class="goal-timeline">{{ goal.timeline }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="legacy-vision">
+            <h3>Legacy Vision</h3>
+            <blockquote class="legacy-quote">
+                "{{ goals.legacy_vision }}"
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<section class="personal-interests" role="region" aria-labelledby="personal-title">
+    <div class="container">
+        <h2 id="personal-title" class="section-title">Beyond Professional Life</h2>
+        <div class="personal-grid">
+            {% if interests and interests|length > 0 %}
+                {% for personal in interests[-1]['items'] %}
+                <div class="personal-card">
+                    <h4>{{ personal.title }}</h4>
+                    <p>{{ personal.description }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Fallback personal interests if not in main interests data -->
+            <div class="personal-card">
+                <h4>Cultural Exploration</h4>
+                <p>Traveling and experiencing different cultures, having lived and worked across four continents</p>
+            </div>
+            <div class="personal-card">
+                <h4>Language Learning</h4>
+                <p>Currently studying French, Mandarin, and Spanish to better connect with global teams</p>
+            </div>
+            <div class="personal-card">
+                <h4>Executive Coaching</h4>
+                <p>Developing skills in coaching and mentoring to better support team development</p>
+            </div>
+            <div class="personal-card">
+                <h4>Design Thinking</h4>
+                <p>Exploring user experience design and human-computer interaction principles</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="awards-languages" role="region" aria-labelledby="recognition-title">
+    <div class="container">
+        <h2 id="recognition-title" class="section-title">Recognition & Global Perspective</h2>
+
+        <div class="recognition-grid">
+            <div class="awards-section">
+                <h3>Professional Recognition</h3>
+                <div class="awards-list">
+                    <div class="award-item">
+                        <h4>High Achiever Award</h4>
+                        <p class="award-org">Walmart • 2020</p>
+                        <p class="award-desc">Recognized for exceptional performance and business impact in product management</p>
+                    </div>
+                    <div class="award-item">
+                        <h4>Case Competition Associates Choice</h4>
+                        <p class="award-org">Walmart • 2015</p>
+                        <p class="award-desc">Peer recognition for innovative problem-solving and collaborative excellence</p>
+                    </div>
+                    <div class="award-item">
+                        <h4>Human Relations Award</h4>
+                        <p class="award-org">Dale Carnegie • 2015</p>
+                        <p class="award-desc">Excellence in interpersonal communication and relationship building</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="languages-section">
+                <h3>Language Proficiency</h3>
+                <div class="languages-list">
+                    <div class="language-item">
+                        <div class="language-name">English</div>
+                        <div class="language-level native">Native</div>
+                        <div class="language-note">Primary business language</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">French</div>
+                        <div class="language-level basic">Basic</div>
+                        <div class="language-note">Studying for European business expansion</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Mandarin</div>
+                        <div class="language-level basic">Basic</div>
+                        <div class="language-note">Learning for Asian market engagement</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Spanish</div>
+                        <div class="language-level basic">Basic</div>
+                        <div class="language-note">Developing for Latin American operations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="collaboration-cta" role="region" aria-labelledby="collab-title">
+    <div class="container">
+        <div class="collab-content">
+            <h2 id="collab-title">Executive Partnership</h2>
+            <p>
+                If these leadership values and strategic mindset align with your organization's needs,
+                let's explore how my proven track record can drive transformational results for your business.
+            </p>
+            <div class="collab-actions">
+                <a href="/contact" class="btn btn-primary">Executive Partnership</a>
+                <a href="/leadership" class="btn btn-secondary">Leadership Experience</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Additional styles specific to interests page */
+.mission-statement {
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+    padding: var(--spacing-16) 0;
+}
+
+.mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mission-quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--primary-color);
+    margin: var(--spacing-8) 0;
+    padding: var(--spacing-6);
+    border-left: 4px solid var(--primary-color);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+}
+
+.mission-driver {
+    font-size: 1.125rem;
+    color: var(--gray-700);
+}
+
+.interest-category {
+    margin-bottom: var(--spacing-16);
+}
+
+.category-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+    font-size: 1.75rem;
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-12);
+}
+
+.interest-card {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.interest-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.interest-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-4);
+}
+
+.interest-title {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+    font-size: 1.25rem;
+}
+
+.beliefs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.belief-card {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+}
+
+.belief-icon {
+    font-size: 1.5rem;
+    margin-top: var(--spacing-1);
+}
+
+.belief-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.values-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.values-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary-color);
+}
+
+.value-item {
+    position: relative;
+    padding-left: var(--spacing-16);
+    margin-bottom: var(--spacing-12);
+}
+
+.value-marker {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    box-shadow: var(--shadow);
+}
+
+.value-content {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.value-title {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.value-application {
+    margin-top: var(--spacing-4);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--gray-200);
+    color: var(--gray-600);
+    font-style: italic;
+}
+
+.energizers-list {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.energizer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-4);
+    background: var(--gray-50);
+    border-radius: var(--radius);
+}
+
+.energizer-bullet {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.energizer-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.goals-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-12);
+    margin-bottom: var(--spacing-16);
+}
+
+.goals-column h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+}
+
+.goal-card {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--spacing-6);
+}
+
+.goal-title {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.goal-timeline {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: var(--spacing-3);
+}
+
+.legacy-vision {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-8);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+}
+
+.foundational-principle {
+    margin: var(--spacing-8) 0;
+    text-align: center;
+}
+
+.foundational-principle h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-4);
+}
+
+.principle-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--accent-color);
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--accent-color);
+    margin: var(--spacing-4) 0;
+}
+
+.personal-journey {
+    margin-top: var(--spacing-8);
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+}
+
+.personal-journey h3 {
+    color: var(--white);
+    margin-bottom: var(--spacing-4);
+}
+
+.journey-text {
+    font-style: italic;
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.legacy-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--gray-700);
+    margin: var(--spacing-4) 0 0;
+}
+
+.personal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.personal-card {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent-color);
+}
+
+.personal-card h4 {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.collaboration-cta {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    text-align: center;
+}
+
+.collaboration-cta h2 {
+    color: var(--white);
+}
+
+.collab-actions {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Awards and Languages Section */
+.recognition-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-12);
+}
+
+.awards-section h3,
+.languages-section h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-6);
+    text-align: center;
+}
+
+.award-item {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--spacing-4);
+    border-left: 4px solid var(--accent-color);
+}
+
+.award-item h4 {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-2);
+}
+
+.award-org {
+    font-weight: 600;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-2);
+}
+
+.award-desc {
+    color: var(--gray-700);
+    font-style: italic;
+    margin: 0;
+}
+
+.language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gray-50);
+    padding: var(--spacing-4);
+    border-radius: var(--radius);
+    margin-bottom: var(--spacing-3);
+}
+
+.language-name {
+    font-weight: 600;
+    color: var(--gray-800);
+    flex: 1;
+}
+
+.language-level {
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 var(--spacing-3);
+}
+
+.language-level.native {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+.language-level.basic {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.language-note {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    flex: 2;
+    text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .goals-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-8);
+    }
+
+    .recognition-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-8);
+    }
+
+    .language-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-2);
+    }
+
+    .language-note {
+        text-align: left;
+    }
+
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-quote {
+        font-size: 1.25rem;
+    }
+
+    .values-timeline::before {
+        display: none;
+    }
+
+    .value-item {
+        padding-left: 0;
+    }
+
+    .value-marker {
+        display: none;
+    }
+}
+</style>
+{% endblock %}

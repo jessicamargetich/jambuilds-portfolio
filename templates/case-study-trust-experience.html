@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Case Study Header -->
+<section class="case-study-header" role="banner">
+    <div class="container">
+        <div class="case-study-nav">
+            <a href="/projects" class="back-link">← Back to Portfolio</a>
+        </div>
+        <div class="case-study-title-section">
+            <h1 class="case-study-title">Earning Trust & Elevating Experience</h1>
+            <p class="case-study-tagline">Transforming payment experiences through AI-powered optimization and customer-centric design.</p>
+            <div class="case-study-hero-image">
+                <img src="/static/images/trust-experience.jpg" alt="AI-Powered Payment Optimization Platform" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Snapshot -->
+<section class="case-study-snapshot" role="region" aria-labelledby="snapshot-title">
+    <div class="container">
+        <h2 id="snapshot-title" class="section-title">At-a-Glance Snapshot</h2>
+        <div class="snapshot-grid">
+            <div class="snapshot-item">
+                <h3>Company / Role</h3>
+                <p>sticky.io – VP of Product, UX, and Data</p>
+            </div>
+            <div class="snapshot-item">
+                <h3>Timeframe</h3>
+                <p>2023–2024</p>
+            </div>
+            <div class="snapshot-item">
+                <h3>Scope</h3>
+                <p>12-person product team, $44M P&L responsibility, processing $100M+ annually</p>
+            </div>
+            <div class="snapshot-item highlight">
+                <h3>Headline Metric</h3>
+                <p>Reduced involuntary churn by 23% while improving customer satisfaction (NPS) by 74%</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Context / Challenge -->
+<section class="case-study-section" role="region" aria-labelledby="context-title">
+    <div class="container">
+        <h2 id="context-title" class="section-title">Context / Challenge</h2>
+        <div class="section-content">
+            <div class="section-text">
+                <h3>The Business Situation</h3>
+                <p>In 2023, sticky.io faced a critical challenge: payment failures were creating massive involuntary churn, costing millions in revenue. Traditional rule-based payment systems couldn't adapt to sophisticated fraud patterns, declined legitimate transactions, and provided poor customer experiences during payment failures.</p>
+
+                <h3>Why This Problem Mattered</h3>
+                <p>With sticky.io processing over $100M annually in subscription payments, even small improvements in payment success rates translated to massive revenue impact. More critically, involuntary churn was destroying customer relationships—subscribers whose payments failed often never returned, regardless of product satisfaction.</p>
+
+                <h3>Key Constraints</h3>
+                <ul>
+                    <li><strong>Regulatory Compliance:</strong> PCI DSS Level 1 and GDPR requirements limiting data access and processing approaches</li>
+                    <li><strong>Legacy Infrastructure:</strong> Monolithic payment system with 99.9% uptime requirements during transformation</li>
+                    <li><strong>Customer Trust:</strong> Payment failures had created negative brand perception requiring careful UX redesign</li>
+                    <li><strong>Technical Debt:</strong> 5+ years of accumulated payment logic making changes risky and time-intensive</li>
+                </ul>
+            </div>
+            <div class="section-visual">
+                <img src="/static/images/payment-challenge.jpg" alt="Payment failure impact visualization" loading="lazy">
+                <p class="visual-caption">The hidden cost of payment failures: Revenue loss, customer churn, and trust erosion</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Approach / What I Did -->
+<section class="case-study-section alt-bg" role="region" aria-labelledby="approach-title">
+    <div class="container">
+        <h2 id="approach-title" class="section-title">Approach / What I Did</h2>
+        <div class="section-content">
+            <div class="section-text">
+                <h3>My Role and Leadership Scope</h3>
+                <p>As VP of Product, UX, and Data, I had full P&L accountability for sticky.io's $44M revenue stream. I led a 12-person cross-functional team including data scientists, UX designers, engineers, and payment specialists, reporting directly to the CEO with board-level visibility on transformation outcomes.</p>
+
+                <h3>Strategic Framework: Trust-First Transformation</h3>
+                <p>I implemented a holistic approach recognizing that payment optimization required both technical excellence and customer experience redesign:</p>
+
+                <div class="framework-diagram">
+                    <div class="framework-item">
+                        <h4>1. AI-Powered Intelligence</h4>
+                        <p>Built machine learning models processing 200+ signals to predict optimal payment timing and methods</p>
+                    </div>
+                    <div class="framework-item">
+                        <h4>2. Customer-Centric UX</h4>
+                        <p>Redesigned payment failure flows prioritizing transparency and easy resolution paths</p>
+                    </div>
+                    <div class="framework-item">
+                        <h4>3. Data-Driven Optimization</h4>
+                        <p>Implemented real-time A/B testing framework for continuous payment experience improvement</p>
+                    </div>
+                </div>
+
+                <h3>Key Actions and Decisions</h3>
+                <ul>
+                    <li><strong>Customer Research Deep-Dive:</strong> Conducted 150+ customer interviews to understand payment failure emotional impact</li>
+                    <li><strong>AI-First Architecture:</strong> Built real-time ML pipeline processing 50M+ daily transaction signals</li>
+                    <li><strong>Cross-Functional Integration:</strong> Embedded UX researchers directly into engineering sprints for rapid iteration</li>
+                    <li><strong>Compliance-by-Design:</strong> Architected privacy-preserving ML models meeting strict regulatory requirements</li>
+                </ul>
+            </div>
+            <div class="section-visual">
+                <img src="/static/images/trust-framework.jpg" alt="Trust-first payment optimization framework" loading="lazy">
+                <p class="visual-caption">Integrated approach: AI intelligence + Customer experience + Continuous optimization</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solution / Execution -->
+<section class="case-study-section" role="region" aria-labelledby="solution-title">
+    <div class="container">
+        <h2 id="solution-title" class="section-title">Solution / Execution</h2>
+        <div class="section-content">
+            <div class="section-text">
+                <h3>What Was Delivered</h3>
+                <p>The Smart Dunning AI platform combined machine learning payment optimization with empathetic customer experience design. The system predicted optimal retry timing, personalized payment methods, and provided transparent communication during any payment issues.</p>
+
+                <h3>How It Worked</h3>
+                <div class="solution-flow">
+                    <div class="flow-step">
+                        <h4>1. Predictive Payment Intelligence</h4>
+                        <p>ML models analyze 200+ signals (payment history, device fingerprinting, behavioral patterns) to predict optimal payment timing and method selection</p>
+                    </div>
+                    <div class="flow-step">
+                        <h4>2. Personalized Retry Logic</h4>
+                        <p>AI determines individualized retry schedules based on customer payment patterns, reducing false declines by 67%</p>
+                    </div>
+                    <div class="flow-step">
+                        <h4>3. Transparent Customer Communication</h4>
+                        <p>Empathetic messaging and self-service resolution tools maintain trust during payment resolution process</p>
+                    </div>
+                </div>
+
+                <h3>Innovation Highlights</h3>
+                <ul>
+                    <li><strong>Real-Time ML Pipeline:</strong> Sub-100ms payment decision processing with continuous model learning</li>
+                    <li><strong>Behavioral Payment Prediction:</strong> Customer activity patterns predicting payment success probability</li>
+                    <li><strong>Privacy-Preserving AI:</strong> Federated learning approaches meeting GDPR requirements</li>
+                    <li><strong>Empathetic UX Design:</strong> Payment failure experiences redesigned for trust and easy resolution</li>
+                </ul>
+            </div>
+            <div class="section-visual">
+                <img src="/static/images/smart-dunning.jpg" alt="Smart Dunning AI system architecture" loading="lazy">
+                <p class="visual-caption">End-to-end Smart Dunning platform: From prediction to customer resolution</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact / Results -->
+<section class="case-study-section alt-bg" role="region" aria-labelledby="impact-title">
+    <div class="container">
+        <h2 id="impact-title" class="section-title">Impact / Results</h2>
+        <div class="section-content">
+            <div class="impact-metrics">
+                <div class="metric-large">
+                    <span class="metric-value">$15M+</span>
+                    <span class="metric-label">Additional Annual Revenue</span>
+                </div>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span class="metric-number">23%</span>
+                        <span class="metric-desc">Involuntary Churn Reduction</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">+74%</span>
+                        <span class="metric-desc">NPS Improvement</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">67%</span>
+                        <span class="metric-desc">False Decline Reduction</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">99.9%</span>
+                        <span class="metric-desc">System Uptime Maintained</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-text">
+                <h3>Quantitative Outcomes</h3>
+                <ul>
+                    <li><strong>Revenue Recovery:</strong> Generated $15M+ additional annual revenue through churn reduction</li>
+                    <li><strong>Payment Success:</strong> Improved payment authorization rates from 78% to 91%</li>
+                    <li><strong>Customer Retention:</strong> Reduced involuntary churn by 23% across all subscription tiers</li>
+                    <li><strong>Operational Efficiency:</strong> Automated 85% of payment retry decisions reducing manual intervention</li>
+                    <li><strong>Speed to Resolution:</strong> Decreased average payment resolution time from 7 days to 2 hours</li>
+                </ul>
+
+                <h3>Qualitative Outcomes</h3>
+                <ul>
+                    <li><strong>Customer Trust Recovery:</strong> NPS scores improved by 74%, with payment experience ratings rising from 2.1 to 4.6/5</li>
+                    <li><strong>Competitive Advantage:</strong> Created proprietary ML models providing sustainable differentiation</li>
+                    <li><strong>Team Transformation:</strong> Established data-driven culture with embedded UX research practices</li>
+                    <li><strong>Industry Recognition:</strong> Platform architecture referenced in fintech industry best practices</li>
+                </ul>
+
+                <h3>Lasting Legacy</h3>
+                <p>The Smart Dunning AI platform continues operating as sticky.io's core payment infrastructure, processing millions of transactions monthly. The ML models and UX patterns I developed became the foundation for additional fintech products, with the privacy-preserving AI approach becoming a template for GDPR-compliant ML systems.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reflection / Learning -->
+<section class="case-study-section" role="region" aria-labelledby="reflection-title">
+    <div class="container">
+        <h2 id="reflection-title" class="section-title">Reflection / Learning</h2>
+        <div class="section-content">
+            <div class="section-text">
+                <h3>What Worked</h3>
+                <ul>
+                    <li><strong>Customer-Centric AI:</strong> Starting with customer pain points before technical solutions ensured AI served real needs</li>
+                    <li><strong>Integrated UX + AI:</strong> Combining machine learning with empathetic design created holistic experience improvement</li>
+                    <li><strong>Compliance-First Development:</strong> Building privacy protection into ML architecture prevented costly retrofitting</li>
+                    <li><strong>Continuous Learning:</strong> Real-time model updates and A/B testing enabled rapid optimization post-launch</li>
+                </ul>
+
+                <h3>What Didn't Work</h3>
+                <ul>
+                    <li><strong>Initial Model Complexity:</strong> Early AI models were over-engineered; simpler ensemble approaches proved more effective</li>
+                    <li><strong>Change Management:</strong> Customer success team needed more training on new payment resolution tools</li>
+                    <li><strong>Integration Timeline:</strong> Legacy system constraints created longer migration timeline than anticipated</li>
+                </ul>
+
+                <h3>Leadership Lessons</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item">
+                        <h4>🤖 AI + Empathy</h4>
+                        <p>Most powerful AI applications combine technical sophistication with deep human understanding. Technology alone doesn't build trust—experience design does.</p>
+                    </div>
+                    <div class="lesson-item">
+                        <h4>📈 Metrics + Stories</h4>
+                        <p>While quantitative results ($15M revenue) secure executive support, qualitative customer stories drive team motivation and product iteration.</p>
+                    </div>
+                    <div class="lesson-item">
+                        <h4>🔒 Privacy + Performance</h4>
+                        <p>Privacy constraints force creative technical solutions that often result in better, more robust systems than unconstrained approaches.</p>
+                    </div>
+                </div>
+
+                <h3>How It Shaped My Approach</h3>
+                <p>This experience reinforced my belief that breakthrough product innovation happens at the intersection of advanced technology and deep customer empathy. Pure technical optimization misses emotional dimensions that drive real business outcomes.</p>
+
+                <p>The 74% NPS improvement taught me that customer perception of product value often depends more on how technology makes them feel than what it technically accomplishes. I now start every AI/ML project by understanding the emotional journey, not just the technical requirements.</p>
+
+                <p>Most importantly, this project demonstrated that sustainable competitive advantage comes from integrated capabilities (AI + UX + compliance) that competitors cannot easily replicate, rather than point solutions that can be copied.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation to Next Case Study -->
+<section class="case-study-navigation" role="navigation">
+    <div class="container">
+        <div class="nav-links">
+            <a href="/portfolio/growth-engine" class="nav-link secondary">← Previous: Building the Next Growth Engine</a>
+            <a href="/portfolio/failing-fast" class="nav-link primary">Next: Failing Fast & Learning Faster →</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

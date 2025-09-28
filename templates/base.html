@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>{{ meta.title }}</title>
+    <meta name="description" content="{{ meta.description }}">
+    <meta name="keywords" content="{{ meta.keywords }}">
+    <meta name="author" content="{{ meta.author }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ meta.url }}{{ request.url.path }}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ meta.title }}">
+    <meta property="og:description" content="{{ meta.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ meta.url }}{{ request.url.path }}">
+    <meta property="og:site_name" content="{{ config.site_name }}">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta.title }}">
+    <meta name="twitter:description" content="{{ meta.description }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ config.author }}",
+        "url": "{{ config.base_url }}",
+        "sameAs": [
+            "{{ config.social.linkedin }}",
+            "{{ config.social.github }}"
+        ],
+        "jobTitle": "Technical Leader",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "jambuilds.com"
+        }
+    }
+    </script>
+
+    {% if config.google_analytics_id %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.google_analytics_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ config.google_analytics_id }}');
+    </script>
+    {% endif %}
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <a href="/" class="nav-brand">{{ config.site_name }}</a>
+
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" role="menubar">
+                    {% for item in config.navigation %}
+                    <li class="nav-item" role="none">
+                        <a href="{{ item.url }}"
+                           class="nav-link{% if request.url.path == item.url %} active{% endif %}"
+                           role="menuitem">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main" role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul class="social-links">
+                        <li><a href="{{ config.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn Profile">LinkedIn</a></li>
+                        <li><a href="{{ config.social.github }}" target="_blank" rel="noopener" aria-label="GitHub Profile">GitHub</a></li>
+                        <li><a href="mailto:{{ config.social.email }}" aria-label="Send Email">Email</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/leadership">Leadership</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 {{ config.site_name }}. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

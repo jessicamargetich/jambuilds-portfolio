@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header" role="banner">
+    <div class="container">
+        <h1 class="page-title">Executive Partnership</h1>
+        <p class="page-subtitle">Ready to drive $100M+ revenue growth and transformational business results?</p>
+    </div>
+</section>
+
+<section class="contact-intro" role="region" aria-labelledby="intro-title">
+    <div class="container">
+        <div class="intro-content">
+            <h2 id="intro-title">Partner with a Data-Driven Innovation Leader</h2>
+            <p class="lead">
+                Product leader who transforms consumer experiences through data strategy and AI/ML
+                solutions. Proven success leading global teams across four continents to deliver
+                $650M+ revenue impact through personalization, optimization, and payment orchestration.
+                Let's discuss how data-driven innovation can solve your most complex challenges.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="contact-methods" role="region" aria-labelledby="methods-title">
+    <div class="container">
+        <h2 id="methods-title" class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <h3>Email</h3>
+                <p>For project inquiries and professional opportunities</p>
+                <a href="mailto:{{ config.social.email }}" class="contact-link">
+                    {{ config.social.email }}
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </div>
+                <h3>LinkedIn</h3>
+                <p>Professional networking and industry discussions</p>
+                <a href="{{ config.social.linkedin }}" class="contact-link" target="_blank" rel="noopener">
+                    View LinkedIn Profile
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                </div>
+                <h3>GitHub</h3>
+                <p>View my code and technical contributions</p>
+                <a href="{{ config.social.github }}" class="contact-link" target="_blank" rel="noopener">
+                    View GitHub Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form-section" role="region" aria-labelledby="form-title">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-intro">
+                <h2 id="form-title">Send a Message</h2>
+                <p>
+                    Prefer to reach out directly? Use the form below and I'll get back
+                    to you within 24 hours.
+                </p>
+            </div>
+
+            <form class="contact-form" id="contactForm" action="#" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required aria-describedby="name-help">
+                        <small id="name-help" class="form-help">Your full name</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required aria-describedby="email-help">
+                        <small id="email-help" class="form-help">Your email address</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company/Organization</label>
+                    <input type="text" id="company" name="company" aria-describedby="company-help">
+                    <small id="company-help" class="form-help">Optional: Your organization</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required aria-describedby="subject-help">
+                        <option value="">Select opportunity type</option>
+                        <option value="executive">Executive Leadership Role</option>
+                        <option value="vp-product">VP/SVP Product Position</option>
+                        <option value="consulting">Strategic Consulting</option>
+                        <option value="board">Board Advisory Role</option>
+                        <option value="partnership">Strategic Partnership</option>
+                        <option value="other">Other Executive Opportunity</option>
+                    </select>
+                    <small id="subject-help" class="form-help">Choose the best category for your inquiry</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" required aria-describedby="message-help"
+                              placeholder="Tell me about your project, opportunity, or how I can help..."></textarea>
+                    <small id="message-help" class="form-help">Provide details about your inquiry</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline">Timeline</label>
+                    <select id="timeline" name="timeline" aria-describedby="timeline-help">
+                        <option value="">Not specified</option>
+                        <option value="urgent">Urgent (within 1 week)</option>
+                        <option value="soon">Soon (within 1 month)</option>
+                        <option value="planning">Planning phase (1-3 months)</option>
+                        <option value="future">Future consideration</option>
+                    </select>
+                    <small id="timeline-help" class="form-help">When would you like to start?</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Send Message
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        Clear Form
+                    </button>
+                </div>
+
+                <p class="form-notice">
+                    * Required fields. Your information will be kept confidential and used only to respond to your inquiry.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="availability" role="region" aria-labelledby="availability-title">
+    <div class="container">
+        <h2 id="availability-title" class="section-title">Current Availability</h2>
+        <div class="availability-content">
+            <div class="availability-status">
+                <div class="status-indicator available"></div>
+                <div class="status-text">
+                    <h3>Available for Executive Opportunities</h3>
+                    <p>
+                        Currently evaluating C-level and VP Product roles with organizations
+                        seeking proven revenue growth and transformational leadership. Response
+                        time for qualified opportunities is within 24 hours.
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-types">
+                <h3>Ideal Executive Opportunities</h3>
+                <ul>
+                    <li>VP/SVP Product roles with $100M+ revenue organizations</li>
+                    <li>Chief Product Officer positions in high-growth companies</li>
+                    <li>Digital transformation leadership for Fortune 500 clients</li>
+                    <li>Strategic advisory roles for AI/ML product initiatives</li>
+                    <li>Board positions focused on product strategy and innovation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="location" role="region" aria-labelledby="location-title">
+    <div class="container">
+        <h2 id="location-title" class="section-title">Location & Remote Work</h2>
+        <div class="location-grid">
+            <div class="location-item">
+                <h3>Primary Location</h3>
+                <p>Available globally via remote collaboration</p>
+            </div>
+            <div class="location-item">
+                <h3>Time Zones</h3>
+                <p>Comfortable working across US and Southeast Asia time zones</p>
+            </div>
+            <div class="location-item">
+                <h3>Travel</h3>
+                <p>Available for on-site work and client meetings as needed</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Basic form validation
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.classList.add('error');
+            } else {
+                field.classList.remove('error');
+            }
+        });
+
+        if (isValid) {
+            // Here you would typically send the form data to a server
+            // For now, we'll show a success message
+            showFormMessage('Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
+            form.reset();
+        } else {
+            showFormMessage('Please fill in all required fields.', 'error');
+        }
+    });
+
+    function showFormMessage(message, type) {
+        // Remove existing messages
+        const existingMessage = form.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        // Create new message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message ${type}`;
+        messageDiv.textContent = message;
+
+        // Insert message at the top of the form
+        form.insertBefore(messageDiv, form.firstChild);
+
+        // Auto-remove success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+    }
+});
+</script>
+{% endblock %}

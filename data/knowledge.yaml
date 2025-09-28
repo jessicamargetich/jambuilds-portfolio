@@ -1,0 +1,205 @@
+# Learning philosophy and approach
+learning_philosophy:
+  title: "Knowledge as Competitive Advantage"
+  description: "My curiosity has always driven me to explore new domains and build deep expertise. I believe that continuous learning isn't just about staying current—it's about anticipating what's next and building the knowledge foundation to lead through change."
+
+  core_principles:
+    - title: "Curiosity-Driven Exploration"
+      description: "Following intellectual threads wherever they lead, from AI and data science to global business strategy and human psychology"
+
+    - title: "Learning Through Building"
+      description: "Hands-on application of new concepts in real business contexts—every certification backed by practical implementation"
+
+    - title: "Cross-Disciplinary Integration"
+      description: "Connecting insights across technology, business, psychology, and culture to create novel solutions"
+
+    - title: "Teaching to Deepen Understanding"
+      description: "Sharing knowledge through mentoring, training programs, and thought leadership to reinforce my own learning"
+
+# Formal education
+education:
+  - institution: "INSEAD"
+    degree: "Global Executive MBA: Artificial Intelligence (AI) and Business in Asia"
+    locations: ["Singapore", "China", "United Arab Emirates", "France"]
+    focus_areas:
+      - "AI Strategy and Implementation"
+      - "Asian Business Ecosystems"
+      - "Global Leadership in Technology"
+      - "Cross-Cultural Management"
+      - "Digital Transformation"
+    key_projects:
+      - "AI Implementation Strategy for Multi-National Corporations"
+      - "Digital Business Models in Emerging Markets"
+      - "Leading Cultural Change in Global Organizations"
+    impact: "Developed comprehensive understanding of AI's business applications while building global network across four continents"
+    year: "In Progress"
+
+  - institution: "Temple University, Fox School of Business"
+    degree: "Bachelor of Business Administration: Management Information Systems"
+    location: "Philadelphia, USA"
+    focus_areas:
+      - "Information Systems Architecture"
+      - "Database Management"
+      - "Business Process Analysis"
+      - "Technology Project Management"
+    foundation: "Built the technical foundation that enabled my transition from engineering to product leadership"
+    year: "Completed"
+
+  - institution: "Hofstra University, Zarb School of Business"
+    program: "International Business and Entrepreneurship"
+    location: "New York, USA"
+    focus_areas:
+      - "Global Business Strategy"
+      - "Entrepreneurial Leadership"
+      - "International Market Analysis"
+    impact: "Early exposure to global business thinking that shaped my approach to international team leadership"
+    year: "Course Credit"
+
+# Professional certifications organized by domain
+certifications:
+  artificial_intelligence:
+    - title: "Generative AI"
+      provider: "LinkedIn Learning"
+      year: "2025"
+      application: "Currently beta testing Xavier AI and Mokko.ai to understand practical applications in product strategy"
+
+    - title: "Managing Customer Value with Python"
+      provider: "INSEAD"
+      year: "2024"
+      application: "Applied directly to customer segmentation and payment optimization algorithms at sticky.io"
+
+  data_analytics:
+    - title: "Data-driven Decision Making"
+      provider: "PWC"
+      year: "2018"
+      application: "Framework used to establish analytics culture across global product teams"
+
+    - title: "Problem Solving with Excel"
+      provider: "PWC"
+      year: "2019"
+      application: "Advanced modeling techniques for P&L analysis and business forecasting"
+
+  digital_security:
+    - title: "Digital Evidence Investigation"
+      provider: "Wilmington University"
+      year: "2021"
+      application: "Enhanced data governance and security protocols for payment processing compliance"
+
+    - title: "Digital Evidence Discovery"
+      provider: "Wilmington University"
+      year: "2020"
+      application: "Improved data handling procedures for PCI and GDPR compliance initiatives"
+
+  technical_leadership:
+    - title: "Agile Scrum Master & Agile Software Development"
+      provider: "Scrum Alliance"
+      year: "2016"
+      application: "Methodology used to transform sticky.io's product development process, increasing delivery speed by 25%"
+
+    - title: "Certified PC Pro"
+      provider: "TestOut"
+      year: "2019"
+      application: "Technical foundation for infrastructure modernization and team technical mentoring"
+
+  leadership_development:
+    - title: "High Impact Presentations & Breakthrough to Success"
+      provider: "Dale Carnegie"
+      year: "2015"
+      application: "Communication skills that enabled effective stakeholder management across global teams and board presentations"
+
+# Technical fluency areas
+technical_skills:
+  data_and_analytics:
+    description: "End-to-end data pipeline design, telemetry integration, and predictive modeling"
+    tools: ["Hadoop", "SQL", "Tableau", "Looker", "PowerBI", "Python"]
+    current_projects: ["Payment optimization algorithms", "Customer behavior prediction models"]
+
+  ai_and_machine_learning:
+    description: "Practical AI implementation for business problems, from personalization to logistics optimization"
+    applications: ["Customer segmentation", "Payment optimization", "Logistics routing", "Personalization engines"]
+    current_focus: ["Generative AI applications", "Beta testing emerging AI platforms"]
+
+  cloud_architecture:
+    description: "Hybrid data infrastructures, cloud migrations, and secure data exchange systems"
+    platforms: ["AWS Redshift", "Databricks", "Azure", "Hybrid Cloud Solutions"]
+    expertise: ["PCI compliance", "GDPR implementation", "Data governance"]
+
+  product_development:
+    description: "Full product lifecycle from 0-1 innovation through scaling and optimization"
+    methodologies: ["Agile/Scrum", "Design Thinking", "Product-Led Growth"]
+    tools: ["Figma", "Miro", "LucidChart", "Jira", "Confluence", "GitHub"]
+
+# Current learning initiatives
+current_learning:
+  - title: "Advanced AI Strategy"
+    focus: "Exploring enterprise AI implementation patterns and governance frameworks"
+    timeline: "2024-2025"
+    goal: "Develop comprehensive AI adoption methodology for large organizations"
+
+  - title: "Global Leadership Dynamics"
+    focus: "Advanced cross-cultural management and global team optimization"
+    timeline: "Through INSEAD program"
+    goal: "Enhance ability to lead distributed teams across cultural boundaries"
+
+  - title: "Emerging Payment Technologies"
+    focus: "Cryptocurrency, blockchain, and next-generation payment processing"
+    timeline: "Ongoing"
+    goal: "Stay ahead of fintech evolution for strategic product planning"
+
+  - title: "Executive Coaching Methodologies"
+    focus: "Formal training in leadership development and team coaching"
+    timeline: "2024-2025"
+    goal: "Enhance mentoring capabilities and leadership development programs"
+
+# Knowledge sharing and teaching
+knowledge_sharing:
+  - title: "VR Training Program Design"
+    description: "Pioneered Walmart's unconscious bias training, reaching 1.6M employees"
+    impact: "Created scalable learning methodology adopted across 18 corporations"
+
+  - title: "Technical Mentoring"
+    description: "Mentored 30+ professionals from junior developers to senior product managers"
+    approach: "Hands-on project-based learning combined with strategic thinking development"
+
+  - title: "Cross-Company Talent Development"
+    description: "Built talent pipelines connecting 200+ female leaders across technology companies"
+    innovation: "Created peer learning networks that enhanced retention and advancement"
+
+# Learning metrics and impact
+learning_impact:
+  knowledge_application:
+    - metric: "Business Impact"
+      value: "$44M P&L"
+      description: "Direct application of AI/ML knowledge to product strategy and revenue optimization"
+
+    - metric: "Team Development"
+      value: "100+ professionals"
+      description: "Knowledge transfer through mentoring, training, and leadership development"
+
+    - metric: "Innovation Speed"
+      value: "25% faster"
+      description: "Accelerated product development through agile methodologies and data-driven decisions"
+
+    - metric: "Global Reach"
+      value: "4 continents"
+      description: "Applied cross-cultural business knowledge to lead teams across US, Europe, Africa, and Asia"
+
+# Future learning goals
+future_learning:
+  short_term:
+    - "Complete INSEAD Global Executive MBA program"
+    - "Achieve advanced AI strategy certification"
+    - "Expand executive coaching capabilities"
+
+  long_term:
+    - "Develop proprietary AI implementation methodology"
+    - "Establish thought leadership in AI product strategy"
+    - "Create scalable leadership development programs"
+
+  curiosity_driven:
+    - "Exploration of quantum computing applications in business"
+    - "Investigation of Web3 and decentralized business models"
+    - "Study of neuroscience applications in product design"
+
+# Knowledge philosophy quote
+philosophy_quote: "I've learned that the skills that got me here are not all that I'll need to continue progressing. My curiosity drives me to constantly expand my knowledge base, not just to stay current, but to anticipate what's coming next and position myself—and my teams—to lead through change."

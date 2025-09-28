@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header" role="banner">
+    <div class="container">
+        <h1 class="page-title">Executive Leadership</h1>
+        <p class="page-subtitle">Proven executive leadership driving $650M+ revenue through global team excellence</p>
+    </div>
+</section>
+
+<section class="leadership-philosophy" role="region" aria-labelledby="philosophy-title">
+    <div class="container">
+        <div class="philosophy-content">
+            <h2 id="philosophy-title">{{ philosophy.title }}</h2>
+            <p class="lead">{{ philosophy.description }}</p>
+
+            <div class="core-principle">
+                <blockquote class="foundational-quote">
+                    "{{ philosophy.core_belief }}"
+                </blockquote>
+            </div>
+
+            <div class="principles-grid">
+                {% for principle in philosophy.principles %}
+                <div class="principle-card">
+                    <h3>{{ principle.title }}</h3>
+                    <p>{{ principle.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="leadership-evolution">
+                <h3>Continuous Growth</h3>
+                <p class="evolution-text">{{ philosophy.leadership_evolution }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="leadership-metrics" role="region" aria-labelledby="metrics-title">
+    <div class="container">
+        <h2 id="metrics-title" class="section-title">Leadership Impact</h2>
+        <div class="metrics-grid">
+            {% for metric in metrics %}
+            <div class="metric-card">
+                <div class="metric-value">{{ metric.value }}</div>
+                <div class="metric-label">{{ metric.metric }}</div>
+                <div class="metric-description">{{ metric.description }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="leadership-experience" role="region" aria-labelledby="experience-title">
+    <div class="container">
+        <h2 id="experience-title" class="section-title">Leadership Experience</h2>
+        <div class="experience-timeline">
+            {% for experience in experiences %}
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3 class="experience-title">{{ experience.title }}</h3>
+                    <div class="experience-meta">
+                        <span class="company">{{ experience.company }}</span>
+                        <span class="duration">{{ experience.duration }}</span>
+                    </div>
+                </div>
+
+                <div class="experience-content">
+                    <p class="experience-description">{{ experience.description }}</p>
+
+                    <div class="achievements">
+                        <h4>Key Achievements</h4>
+                        <ul>
+                            {% for achievement in experience.achievements %}
+                            <li>{{ achievement }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="skills-used">
+                        <h4>Leadership Skills Applied</h4>
+                        <div class="skills-tags">
+                            {% for skill in experience.skills %}
+                            <span class="skill-tag">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="leadership-approach" role="region" aria-labelledby="approach-title">
+    <div class="container">
+        <h2 id="approach-title" class="section-title">My Leadership Approach</h2>
+        <div class="approach-grid">
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>People-First Leadership</h3>
+                <p>
+                    I prioritize the growth and well-being of team members, creating environments
+                    where individuals can thrive professionally and personally while delivering
+                    exceptional results.
+                </p>
+            </div>
+
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 11l3 3 8-8"></path>
+                        <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.24 0 2.42.25 3.5.7"></path>
+                    </svg>
+                </div>
+                <h3>Results-Driven Execution</h3>
+                <p>
+                    While maintaining focus on people development, I ensure teams consistently
+                    deliver measurable business outcomes through clear goals, accountability,
+                    and continuous improvement.
+                </p>
+            </div>
+
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                </div>
+                <h3>Innovation & Excellence</h3>
+                <p>
+                    I foster cultures of innovation where teams are encouraged to challenge
+                    the status quo, experiment with new approaches, and continuously raise
+                    the bar for quality and performance.
+                </p>
+            </div>
+
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                    </svg>
+                </div>
+                <h3>Adaptive Communication</h3>
+                <p>
+                    I adapt my communication style to meet the needs of diverse stakeholders,
+                    ensuring clear understanding, buy-in, and alignment across all levels
+                    of the organization.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials" role="region" aria-labelledby="testimonials-title">
+    <div class="container">
+        <h2 id="testimonials-title" class="section-title">What Colleagues Say</h2>
+        <div class="testimonials-grid">
+            <blockquote class="testimonial">
+                <p>
+                    "Jessica's executive leadership transformed our product strategy and delivered exceptional results. Her ability to scale global teams while maintaining focus on revenue generation is truly remarkable."
+                </p>
+                <cite>— Executive Team Member</cite>
+            </blockquote>
+
+            <blockquote class="testimonial">
+                <p>
+                    "Outstanding product leader who combines deep technical expertise with proven business acumen. Under her leadership, we achieved significant revenue growth across multiple markets including Fortune 500 clients."
+                </p>
+                <cite>— Cross-Functional Partner</cite>
+            </blockquote>
+
+            <blockquote class="testimonial">
+                <p>
+                    "Jessica's mentorship and leadership philosophy created a high-performing culture that delivered measurable business impact. Her investment in talent development while driving P&L results is unmatched."
+                </p>
+                <cite>— Direct Report</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<section class="cta" role="region" aria-labelledby="leadership-cta-title">
+    <div class="container">
+        <div class="cta-content">
+            <h2 id="leadership-cta-title">Executive Leadership Partnership</h2>
+            <p>Let's discuss how my proven executive leadership can drive transformational results for your organization</p>
+            <div class="cta-actions">
+                <a href="/contact" class="btn btn-primary">Start a Conversation</a>
+                <a href="/projects" class="btn btn-secondary">View Technical Projects</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

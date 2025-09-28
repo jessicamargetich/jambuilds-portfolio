@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header" role="banner">
+    <div class="container">
+        <h1 class="page-title">Data-Driven Product Innovation</h1>
+        <p class="page-subtitle">AI/ML solutions transforming consumer experiences through data-powered personalization, optimization, and payment orchestration</p>
+    </div>
+</section>
+
+<section class="projects-filter" role="region" aria-labelledby="filter-title">
+    <div class="container">
+        <h2 id="filter-title" class="visually-hidden">Filter Projects</h2>
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All Solutions</button>
+            <button class="filter-btn" data-filter="personalization">Personalization</button>
+            <button class="filter-btn" data-filter="optimization">Fulfillment Optimization</button>
+            <button class="filter-btn" data-filter="payments">Payment Orchestration</button>
+            <button class="filter-btn" data-filter="analytics">Data Analytics</button>
+        </div>
+    </div>
+</section>
+
+<section class="projects-grid" role="region" aria-labelledby="projects-title">
+    <div class="container">
+        <h2 id="projects-title" class="visually-hidden">Project Showcase</h2>
+        <div class="projects-container">
+            {% for project in projects %}
+            <article class="project-card" data-category="{{ project.tech_stack | join(' ') | lower }}">
+                <div class="project-image">
+                    <img src="{{ project.image }}" alt="{{ project.title }} screenshot" loading="lazy">
+                    <div class="project-overlay">
+                        <button class="btn btn-primary" onclick="openProjectModal('{{ loop.index0 }}')">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+
+                    <div class="project-meta">
+                        <span class="project-role">{{ project.role }}</span>
+                        <span class="project-duration">{{ project.duration }}</span>
+                    </div>
+
+                    <div class="tech-stack">
+                        {% for tech in project.tech_stack[:3] %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                        {% if project.tech_stack | length > 3 %}
+                        <span class="tech-more">+{{ project.tech_stack | length - 3 }} more</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Project Modals -->
+{% for project in projects %}
+<div id="project-modal-{{ loop.index0 }}" class="modal" role="dialog" aria-labelledby="modal-title-{{ loop.index0 }}">
+    <div class="modal-overlay" onclick="closeProjectModal('{{ loop.index0 }}')"></div>
+    <div class="modal-content">
+        <header class="modal-header">
+            <h2 id="modal-title-{{ loop.index0 }}" class="modal-title">{{ project.title }}</h2>
+            <button class="modal-close" onclick="closeProjectModal('{{ loop.index0 }}')" aria-label="Close modal">&times;</button>
+        </header>
+
+        <div class="modal-body">
+            <div class="project-details">
+                <div class="project-main-info">
+                    <img src="{{ project.image }}" alt="{{ project.title }} detailed view" class="project-detail-image">
+
+                    <div class="project-info">
+                        <p class="project-full-description">{{ project.description }}</p>
+
+                        <div class="project-meta-detailed">
+                            <div class="meta-item">
+                                <strong>Role:</strong> {{ project.role }}
+                            </div>
+                            <div class="meta-item">
+                                <strong>Duration:</strong> {{ project.duration }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <section class="project-section">
+                        <h3>Key Features</h3>
+                        <ul class="features-list">
+                            {% for feature in project.features %}
+                            <li>{{ feature }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-stack-detailed">
+                            {% for tech in project.tech_stack %}
+                            <span class="tech-tag">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </section>
+
+                    <section class="project-section">
+                        <h3>Outcomes & Impact</h3>
+                        <ul class="outcomes-list">
+                            {% for outcome in project.outcomes %}
+                            <li>{{ outcome }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<section class="project-stats" role="region" aria-labelledby="stats-title">
+    <div class="container">
+        <h2 id="stats-title" class="section-title">Revenue Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">$650M+</div>
+                <div class="stat-label">Revenue Generated</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">Fortune 500</div>
+                <div class="stat-label">Client Tier</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$44M</div>
+                <div class="stat-label">P&L Managed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">25%</div>
+                <div class="stat-label">Client Retention Increase</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="technologies-overview" role="region" aria-labelledby="tech-title">
+    <div class="container">
+        <h2 id="tech-title" class="section-title">Technical Expertise</h2>
+        <div class="tech-categories">
+            <div class="tech-category">
+                <h3>Languages</h3>
+                <div class="tech-list">
+                    {% for lang in technologies.languages %}
+                    <span class="tech-item">{{ lang }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Frameworks</h3>
+                <div class="tech-list">
+                    {% for framework in technologies.frameworks %}
+                    <span class="tech-item">{{ framework }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Databases</h3>
+                <div class="tech-list">
+                    {% for db in technologies.databases %}
+                    <span class="tech-item">{{ db }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Cloud & DevOps</h3>
+                <div class="tech-list">
+                    {% for cloud in technologies.cloud %}
+                    <span class="tech-item">{{ cloud }}</span>
+                    {% endfor %}
+                    {% for tool in technologies.tools %}
+                    <span class="tech-item">{{ tool }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta" role="region" aria-labelledby="projects-cta-title">
+    <div class="container">
+        <div class="cta-content">
+            <h2 id="projects-cta-title">Ready for Transformational Results?</h2>
+            <p>Let's discuss how my proven product leadership can drive your next $100M+ revenue initiative</p>
+            <div class="cta-actions">
+                <a href="/contact" class="btn btn-primary">Partner With Me</a>
+                <a href="/leadership" class="btn btn-secondary">Executive Leadership</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Project modal functionality
+function openProjectModal(projectIndex) {
+    document.getElementById(`project-modal-${projectIndex}`).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal(projectIndex) {
+    document.getElementById(`project-modal-${projectIndex}`).style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Project filtering
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter projects
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category.includes(filter)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

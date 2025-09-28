@@ -1,0 +1,76 @@
+site_name: "jambuilds.com"
+site_description: "Visionary Technical Product Leader with 10+ years experience embedding data and technology into product strategy"
+author: "Jessica A. Margetich"
+base_url: "https://jambuilds.com"
+keywords: "data-driven product leader, AI machine learning executive, technical product management, VP product, chief product officer, product strategy, data analytics leader, global team management, product development, technology leadership, artificial intelligence, ML engineering, data science, product manager, senior product manager, principal product manager, executive leadership, P&L management, digital transformation, innovation leadership"
+
+# Social links
+social:
+  linkedin: "https://linkedin.com/in/jessica-margetich"
+  github: "https://github.com/jessica-margetich"
+  email: "jessica.a.margetich@gmail.com"
+
+# Analytics
+google_analytics_id: ""  # Add your GA4 ID later
+google_search_console: ""  # Add verification code later
+
+# Page-specific meta data
+pages:
+  home:
+    title: "Jessica Margetich - Data-Driven Product Leader & AI Executive"
+    description: "Executive Product Leader with 10+ years embedding data and AI into product strategy, delivering $650M+ revenue impact and leading global teams across eCommerce, Fintech, and SaaS"
+    keywords: "data-driven product leader, AI executive, machine learning product management, VP product strategy, chief product officer, artificial intelligence leadership, ML product development, data analytics executive, technical product management, product innovation, digital transformation leader, global team leadership, P&L management, revenue growth, fintech product leader, ecommerce product strategy, SaaS product management"
+
+  about:
+    title: "About Jessica Margetich - Executive Product Leader & Data Strategy Expert"
+    description: "Executive leader specializing in data-driven product strategy, AI/ML implementation, and scaling high-performing global teams across Fortune 500 organizations"
+    keywords: "executive product leader, data strategy expert, AI ML implementation, product strategy executive, technical leadership, product development, data analytics leader, machine learning products, global team management, digital transformation, technology strategy, product innovation, data-driven decision making, artificial intelligence products, VP product management, chief product officer, senior product leader"
+
+  leadership:
+    title: "Executive Leadership - Jessica Margetich | $650M+ Revenue Impact"
+    description: "Proven executive leadership managing $44M P&L, scaling global teams across 4 continents, and driving innovation at Fortune 500 companies including Walmart and sticky.io"
+    keywords: "executive leadership, P&L management, global team leadership, product strategy executive, VP leadership, chief product officer, senior leadership, team management, global operations, Fortune 500 leadership, revenue leadership, innovation management, strategic leadership, organizational leadership, cross-functional leadership, matrixed organizations, team scaling, leadership development, executive management"
+
+  projects:
+    title: "AI & Data Projects - Jessica Margetich | Technical Innovation Portfolio"
+    description: "Data-driven product initiatives: AI-powered payment optimization, ML delivery platforms, predictive analytics, and enterprise data solutions delivering measurable business impact"
+    keywords: "AI projects, machine learning projects, data analytics projects, payment optimization, ML algorithms, artificial intelligence implementation, data science projects, predictive analytics, business intelligence, data engineering, ML engineering, AI product development, data-driven solutions, technical innovation, software engineering, product development, technology projects, automation, optimization algorithms, data visualization, analytics platforms"
+
+  blog:
+    title: "Blog & Insights - jambuilds.com"
+    description: "Professional insights, industry thoughts, and LinkedIn posts"
+    keywords: "blog, insights, professional thoughts, linkedin"
+
+  interests:
+    title: "Interests & Motivation - Jessica Margetich"
+    description: "Personal interests, professional motivations, and values driving innovation and leadership excellence"
+    keywords: "interests, motivation, values, innovation, leadership philosophy, professional drivers"
+
+  knowledge:
+    title: "Knowledge & Learning - Jessica Margetich"
+    description: "Continuous learning journey, executive education, technical certifications, and knowledge-building philosophy"
+    keywords: "education, certifications, learning, INSEAD, AI education, technical skills, continuous improvement"
+
+  contact:
+    title: "Contact - jambuilds.com"
+    description: "Get in touch for professional opportunities and collaborations"
+    keywords: "contact, hire, collaborate, professional"
+
+# Navigation
+navigation:
+  - name: "Home"
+    url: "/"
+  - name: "About"
+    url: "/about"
+  - name: "Leadership"
+    url: "/leadership"
+  - name: "Projects"
+    url: "/projects"
+  - name: "Blog"
+    url: "/blog"
+  - name: "Interests"
+    url: "/interests"
+  - name: "Knowledge"
+    url: "/knowledge"
+  - name: "Contact"
+    url: "/contact"
