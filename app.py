@@ -15,6 +15,9 @@ app = FastAPI(
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# Mount SuperDesign directory for VS Code extension
+app.mount("/.superdesign", StaticFiles(directory=".superdesign"), name="superdesign")
+
 # Set up templates
 templates = Jinja2Templates(directory="templates")
 
