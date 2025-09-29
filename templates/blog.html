@@ -62,6 +62,8 @@
     transition: all 300ms ease;
     background: #f8fafc;
     height: 48px;
+    box-sizing: border-box;
+    line-height: 1.2;
 }
 
 .search-input:focus {
@@ -92,6 +94,7 @@
 .dropdown-trigger {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 12px 20px;
     background: #f8fafc;
@@ -102,6 +105,9 @@
     font-weight: 500;
     white-space: nowrap;
     height: 48px;
+    box-sizing: border-box;
+    line-height: 1.2;
+    min-height: 48px;
 }
 
 .dropdown-trigger:hover {
@@ -440,14 +446,23 @@
     .filter-bar {
         flex-direction: column;
         align-items: stretch;
+        gap: 16px;
     }
 
     .search-container {
         min-width: auto;
+        margin-bottom: 0;
     }
 
     .filter-controls {
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .dropdown-trigger {
+        flex: 1;
+        min-width: 0;
     }
 
     .dropdown-menu {
@@ -702,11 +717,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownMenus = document.querySelectorAll('.dropdown-menu');
     let activeFilters = [];
 
-    dropdownTriggers.forEach(trigger => {
+    console.log('Found dropdown triggers:', dropdownTriggers.length);
+    console.log('Found dropdown menus:', dropdownMenus.length);
+
+    dropdownTriggers.forEach((trigger, index) => {
+        console.log(`Setting up trigger ${index}:`, trigger.dataset.dropdown);
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault();
             const targetMenu = trigger.dataset.dropdown;
             const menu = document.querySelector(`[data-menu="${targetMenu}"]`);
+
+            console.log('Dropdown clicked:', targetMenu, 'Menu found:', !!menu);
 
             // Close other dropdowns
             dropdownMenus.forEach(m => {
@@ -717,8 +739,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Toggle current dropdown
-            menu.classList.toggle('active');
-            trigger.classList.toggle('active');
+            if (menu) {
+                menu.classList.toggle('active');
+                trigger.classList.toggle('active');
+                console.log('Toggled dropdown:', targetMenu, 'Active:', menu.classList.contains('active'));
+            }
         });
     });
 
@@ -898,6 +923,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize with all filters selected
     applyFilters();
+
+    // Test basic dropdown functionality
+    setTimeout(() => {
+        console.log('Testing dropdown functionality...');
+        const firstTrigger = document.querySelector('.dropdown-trigger');
+        const firstMenu = document.querySelector('.dropdown-menu');
+        if (firstTrigger && firstMenu) {
+            console.log('Found first trigger and menu, testing click...');
+            firstTrigger.click();
+            setTimeout(() => {
+                console.log('Menu active after click:', firstMenu.classList.contains('active'));
+            }, 100);
+        }
+    }, 1000);
 
     console.log('Blog Filter Variation 3 (Dropdown/Modal Layout) loaded successfully');
 });
