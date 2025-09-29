@@ -207,6 +207,7 @@ p {
     transition: var(--transition);
     padding: var(--spacing-2) var(--spacing-3);
     border-radius: var(--radius);
+    cursor: pointer;
 }
 
 .nav-link:hover,
@@ -221,7 +222,7 @@ p {
 }
 
 .dropdown-toggle {
-    cursor: pointer;
+    cursor: default;
     user-select: none;
 }
 
@@ -258,6 +259,7 @@ p {
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .dropdown-link:hover {

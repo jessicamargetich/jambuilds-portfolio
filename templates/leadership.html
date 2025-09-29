@@ -52,46 +52,6 @@
     </div>
 </section>
 
-<section class="leadership-experience" role="region" aria-labelledby="experience-title">
-    <div class="container">
-        <h2 id="experience-title" class="section-title">Leadership Experience</h2>
-        <div class="experience-timeline">
-            {% for experience in experiences %}
-            <article class="experience-item">
-                <div class="experience-header">
-                    <h3 class="experience-title">{{ experience.title }}</h3>
-                    <div class="experience-meta">
-                        <span class="company">{{ experience.company }}</span>
-                        <span class="duration">{{ experience.duration }}</span>
-                    </div>
-                </div>
-
-                <div class="experience-content">
-                    <p class="experience-description">{{ experience.description }}</p>
-
-                    <div class="achievements">
-                        <h4>Key Achievements</h4>
-                        <ul>
-                            {% for achievement in experience.achievements %}
-                            <li>{{ achievement }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
-                    <div class="skills-used">
-                        <h4>Leadership Skills Applied</h4>
-                        <div class="skills-tags">
-                            {% for skill in experience.skills %}
-                            <span class="skill-tag">{{ skill }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
 <section class="leadership-approach" role="region" aria-labelledby="approach-title">
     <div class="container">
