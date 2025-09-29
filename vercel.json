@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "app.py": {
-      "runtime": "python3.9"
-    }
-  },
   "rewrites": [
     {
       "source": "/static/(.*)",
@@ -11,7 +6,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/app.py"
+      "destination": "/api/app"
     }
   ]
 }
