@@ -64,6 +64,38 @@ async def about(request: Request):
     except Exception as e:
         return HTMLResponse(f"<h1>About Page</h1><p>Debug: {str(e)}</p>", status_code=200)
 
+@app.get("/career-journey")
+async def career_journey(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("about", config)
+        meta["title"] = "Career Journey - Jessica Margetich"
+        return templates.TemplateResponse("career-journey.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Career Journey</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/credentials")
+async def credentials(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("knowledge", config)
+        meta["title"] = "Credentials - Jessica Margetich"
+        knowledge_data = load_data("knowledge.yaml")
+        return templates.TemplateResponse("credentials.html", {
+            "request": request,
+            "meta": meta,
+            "config": config,
+            "education": knowledge_data.get("education", []),
+            "certifications": knowledge_data.get("certifications", {}),
+            "technical_skills": knowledge_data.get("technical_skills", {})
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Credentials</h1><p>Debug: {str(e)}</p>", status_code=200)
+
 @app.get("/projects")
 async def projects(request: Request):
     try:

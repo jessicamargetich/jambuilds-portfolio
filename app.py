@@ -79,6 +79,32 @@ async def about(request: Request):
         "config": config
     })
 
+@app.get("/career-journey", response_class=HTMLResponse)
+async def career_journey(request: Request):
+    config = get_site_config()
+    meta = get_page_meta("about", config)
+    meta["title"] = "Career Journey - Jessica Margetich"
+    return templates.TemplateResponse("career-journey.html", {
+        "request": request,
+        "meta": meta,
+        "config": config
+    })
+
+@app.get("/credentials", response_class=HTMLResponse)
+async def credentials(request: Request):
+    config = get_site_config()
+    meta = get_page_meta("knowledge", config)
+    meta["title"] = "Credentials - Jessica Margetich"
+    knowledge_data = load_data("knowledge.yaml")
+    return templates.TemplateResponse("credentials.html", {
+        "request": request,
+        "meta": meta,
+        "config": config,
+        "education": knowledge_data.get("education", []),
+        "certifications": knowledge_data.get("certifications", {}),
+        "technical_skills": knowledge_data.get("technical_skills", {})
+    })
+
 @app.get("/leadership", response_class=HTMLResponse)
 async def leadership(request: Request):
     config = get_site_config()

@@ -81,15 +81,30 @@
                 </button>
 
                 <ul class="nav-menu" role="menubar">
-                    {% for item in config.navigation %}
-                    <li class="nav-item" role="none">
-                        <a href="{{ item.url }}"
-                           class="nav-link{% if request.url.path == item.url %} active{% endif %}"
-                           role="menuitem">
-                            {{ item.name }}
-                        </a>
+                    <li class="nav-item dropdown" role="none">
+                        <span class="nav-link dropdown-toggle" role="menuitem" aria-haspopup="true">Experience</span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/career-journey" class="dropdown-link" role="menuitem">Career Journey</a></li>
+                            <li><a href="/projects" class="dropdown-link" role="menuitem">Portfolio</a></li>
+                            <li><a href="/credentials" class="dropdown-link" role="menuitem">Credentials</a></li>
+                        </ul>
                     </li>
-                    {% endfor %}
+                    <li class="nav-item dropdown" role="none">
+                        <span class="nav-link dropdown-toggle" role="menuitem" aria-haspopup="true">Leadership</span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/leadership" class="dropdown-link" role="menuitem">Leadership Philosophy</a></li>
+                            <li><a href="/interests" class="dropdown-link" role="menuitem">Interests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" role="none">
+                        <span class="nav-link dropdown-toggle" role="menuitem" aria-haspopup="true">Insights</span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/blog" class="dropdown-link" role="menuitem">Blog Posts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="/contact" class="nav-link{% if request.url.path == '/contact' %} active{% endif %}" role="menuitem">Contact</a>
+                    </li>
                 </ul>
             </div>
         </nav>

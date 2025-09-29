@@ -3,8 +3,8 @@
 {% block content %}
 <section class="page-header" role="banner">
     <div class="container">
-        <h1 class="page-title">Leadership Philosophy & Values</h1>
-        <p class="page-subtitle">The executive mindset driving $650M+ revenue generation and global team excellence</p>
+        <h1 class="page-title">Interests & Values</h1>
+        <p class="page-subtitle">Personal values, curiosity-driven pursuits, and competitive advantages</p>
     </div>
 </section>
 
@@ -30,6 +30,81 @@
             <div class="personal-journey">
                 <h3>Personal Evolution</h3>
                 <p class="journey-text">{{ motivations.personal_evolution }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="values" role="region" aria-labelledby="values-title">
+    <div class="container">
+        <h2 id="values-title" class="section-title">Values & Approach</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <h3>Curiosity & Resilience</h3>
+                <p>
+                    Driven by an innate curiosity that leads to exploration and breakthrough thinking.
+                    I believe that resilience is built through struggle, and that facing challenges
+                    head-on creates the strongest foundations for innovation and growth.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <h3>Quality First</h3>
+                <p>
+                    Committed to delivering high-quality solutions through rigorous testing,
+                    code reviews, and adherence to industry standards and best practices.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <h3>Collaborative Excellence</h3>
+                <p>
+                    Building inclusive, diverse teams where every voice is heard and
+                    collective intelligence drives innovative problem-solving.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <h3>Customer Focus</h3>
+                <p>
+                    Maintaining a customer-centric mindset in all technical decisions,
+                    ensuring solutions deliver real value and exceptional user experiences.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="knowledge-advantage" role="region" aria-labelledby="knowledge-title">
+    <div class="container">
+        <h2 id="knowledge-title" class="section-title">Knowledge as Competitive Advantage</h2>
+        <div class="knowledge-content">
+            <div class="knowledge-philosophy">
+                <blockquote>
+                    "I've learned that the skills that got me here are not all that I'll need to continue progressing. My curiosity drives me to constantly expand my knowledge base, not just to stay current, but to anticipate what's coming next and position myself—and my teams—to lead through change."
+                </blockquote>
+            </div>
+
+            <div class="knowledge-principles">
+                <h3>Learning Principles</h3>
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <h4>Continuous Learning</h4>
+                        <p>Embracing a growth mindset that views every challenge as an opportunity to expand capabilities and deepen understanding.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Knowledge Application</h4>
+                        <p>Translating theoretical understanding into practical solutions that drive measurable business outcomes and competitive advantage.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Cross-Functional Mastery</h4>
+                        <p>Developing expertise across technical, business, and leadership domains to bridge gaps and drive holistic solutions.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Future-Forward Thinking</h4>
+                        <p>Anticipating industry trends and technological shifts to position teams and organizations ahead of the curve.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -554,6 +629,65 @@
     gap: var(--spacing-4);
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Values and Approach section */
+.values {
+    background: var(--gray-50);
+    padding: var(--spacing-16) 0;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.value-item {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+}
+
+.value-item h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+/* Knowledge as Competitive Advantage section */
+.knowledge-advantage {
+    background: var(--white);
+    padding: var(--spacing-16) 0;
+}
+
+.knowledge-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.knowledge-philosophy {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.knowledge-philosophy blockquote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--primary-color);
+    background: var(--gray-50);
+    padding: var(--spacing-8);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow);
+    margin: 0;
+}
+
+.knowledge-principles h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-8);
 }
 
 /* Awards and Languages Section */
