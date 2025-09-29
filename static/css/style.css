@@ -158,6 +158,42 @@ p {
     text-decoration: none;
 }
 
+/* Wordmark Styling */
+.wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--font-family);
+}
+
+.wordmark-jam {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-color); /* Dark blue */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.wordmark-builds {
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gray-500); /* Gray */
+    margin-left: 0.1em;
+}
+
+.wordmark-dot {
+    color: var(--success-color); /* Emerald green for the 'i' dot */
+    position: relative;
+}
+
+.nav-brand:hover .wordmark-jam {
+    color: var(--primary-dark);
+}
+
+.nav-brand:hover .wordmark-dot {
+    color: #059669; /* Darker emerald on hover */
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
