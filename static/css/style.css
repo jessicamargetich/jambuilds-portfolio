@@ -6,30 +6,37 @@
 }
 
 :root {
-    /* Colors */
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #64748b;
-    --accent-color: #f59e0b;
-    --success-color: #10b981;
-    --error-color: #ef4444;
+    /* Executive Edge Colors - Forest Green & Rose Gold */
+    --primary-color: #1B4332;
+    --primary-light: #2F5F40;
+    --primary-dark: #0F2B1A;
+    --accent-color: #E8B4A0;
+    --accent-light: #F0C4B3;
+    --accent-dark: #D49B85;
+    --supporting-color: #52796F;
+    --success-color: #2F7D32;
+    --error-color: #C62828;
 
-    /* Neutrals */
-    --white: #ffffff;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-300: #cbd5e1;
-    --gray-400: #94a3b8;
-    --gray-500: #64748b;
-    --gray-600: #475569;
-    --gray-700: #334155;
-    --gray-800: #1e293b;
-    --gray-900: #0f172a;
+    /* Refined Neutrals */
+    --white: #FFF8F0;
+    --ivory: #FFF8F0;
+    --cream: #FAF7F2;
+    --sage-50: #F7FAF8;
+    --sage-100: #EDF4F0;
+    --sage-200: #D6E6DC;
+    --sage-300: #B8D4C3;
+    --sage-400: #8FB8A5;
+    --sage-500: #52796F;
+    --sage-600: #456B60;
+    --sage-700: #3A5950;
+    --sage-800: #2F4740;
+    --sage-900: #243630;
 
     /* Typography */
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'Fira Code', Monaco, 'Cascadia Code', monospace;
+    --font-brand: 'Playfair Display', serif;
 
     /* Spacing */
     --spacing-1: 0.25rem;
@@ -66,17 +73,18 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-sans);
     line-height: 1.6;
-    color: var(--gray-700);
-    background-color: var(--white);
+    color: var(--sage-800);
+    background-color: var(--ivory);
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
     font-weight: 700;
     line-height: 1.3;
-    color: var(--gray-900);
+    color: var(--primary-color);
     margin-bottom: var(--spacing-4);
 }
 
@@ -94,7 +102,8 @@ p {
 .lead {
     font-size: 1.25rem;
     font-weight: 300;
-    color: var(--gray-600);
+    color: var(--sage-700);
+    line-height: 1.7;
 }
 
 /* Accessibility */
@@ -162,13 +171,14 @@ p {
 .wordmark {
     display: inline-flex;
     align-items: baseline;
-    font-family: var(--font-family);
+    font-family: var(--font-serif);
+    font-weight: 700;
 }
 
 .wordmark-jam {
     font-weight: 800;
     font-size: 1.5rem;
-    color: var(--primary-color); /* Dark blue */
+    color: var(--primary-color); /* Forest Green */
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -177,21 +187,22 @@ p {
     font-weight: 400;
     font-size: 1.5rem;
     font-style: italic;
-    color: var(--gray-500); /* Gray */
+    color: var(--gray-600); /* Darker gray for better contrast */
     margin-left: 0.1em;
 }
 
 .wordmark-dot {
-    color: var(--success-color); /* Emerald green for the 'i' dot */
+    color: var(--accent-color); /* Rose Gold for the 'i' dot */
     position: relative;
+    font-weight: 700;
 }
 
 .nav-brand:hover .wordmark-jam {
-    color: var(--primary-dark);
+    color: #0F2922; /* Darker forest green on hover */
 }
 
 .nav-brand:hover .wordmark-dot {
-    color: #059669; /* Darker emerald on hover */
+    color: #D4956B; /* Darker rose gold on hover */
 }
 
 .nav-menu {
@@ -407,8 +418,24 @@ section {
 .highlights-grid,
 .competencies-grid,
 .values-grid,
-.metrics-grid,
-.approach-grid,
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-8);
+    /* Asymmetrical metrics layout */
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-8);
+    /* Offset every other item for visual rhythm */
+}
+
+.approach-item:nth-child(even) {
+    margin-top: var(--spacing-8);
+}
+
 .topics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -438,8 +465,9 @@ section {
 .highlight-card:hover,
 .topic-card:hover,
 .approach-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(27, 67, 50, 0.12);
+    border-color: var(--accent-color);
 }
 
 .highlight-icon,
@@ -459,6 +487,26 @@ section {
 .metric-card {
     text-align: center;
     border: 2px solid var(--gray-200);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add gradient accent for metric cards */
+.metric-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    opacity: 0.8;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(27, 67, 50, 0.15);
+    border-color: var(--primary-color);
 }
 
 .metric-value {
@@ -1899,6 +1947,17 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: var(--spacing-8);
+    /* Asymmetrical layout for visual interest */
+    grid-auto-rows: auto;
+}
+
+/* Staggered layout for portfolio cards */
+.portfolio-card:nth-child(2n) {
+    margin-top: var(--spacing-12);
+}
+
+.portfolio-card:nth-child(3n) {
+    margin-top: var(--spacing-6);
 }
 
 .portfolio-card {
@@ -2047,6 +2106,16 @@ section {
         gap: var(--spacing-6);
     }
 
+    /* Reset staggered layout on mobile */
+    .portfolio-card:nth-child(2n),
+    .portfolio-card:nth-child(3n) {
+        margin-top: 0;
+    }
+
+    .approach-item:nth-child(even) {
+        margin-top: 0;
+    }
+
     .portfolio-meta {
         flex-direction: column;
         gap: var(--spacing-1);
@@ -2077,6 +2146,202 @@ section {
         color: var(--primary-color);
         font-weight: 700;
     }
+}
+
+/* === MICRO-ANIMATIONS & INTERACTIVE ELEMENTS === */
+
+/* Fade in animation for page content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Animation classes */
+.animate-on-scroll {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fade-left {
+    opacity: 0;
+    animation: fadeInLeft 0.6s ease forwards;
+}
+
+.animate-fade-right {
+    opacity: 0;
+    animation: fadeInRight 0.6s ease forwards;
+}
+
+.animate-scale {
+    opacity: 0;
+    animation: scaleIn 0.6s ease forwards;
+}
+
+/* Staggered animation delays */
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+
+/* Enhanced button interactions */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Parallax and scroll effects */
+.parallax-element {
+    transform: translateY(0);
+    transition: transform 0.3s ease-out;
+}
+
+/* Enhanced navigation micro-interactions */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Enhanced dropdown animations */
+.dropdown-menu {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading state shimmer effect */
+.loading-shimmer {
+    background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.nav-link:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Page transitions */
+.page-transition {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Hero section special effects */
+.hero-content {
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero-subtitle {
+    animation: fadeInUp 1s ease forwards 0.2s;
+    opacity: 0;
+}
+
+.hero-cta {
+    animation: fadeInUp 1s ease forwards 0.4s;
+    opacity: 0;
 }
 
 /* Screen Reader Only */
