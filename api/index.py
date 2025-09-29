@@ -91,6 +91,142 @@ async def growth_engine(request: Request):
     except Exception as e:
         return HTMLResponse(f"<h1>Growth Engine Case Study</h1><p>Debug: {str(e)}</p>", status_code=200)
 
+@app.get("/leadership")
+async def leadership(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("leadership", config)
+        leadership_data = load_data("leadership.yaml")
+        return templates.TemplateResponse("leadership.html", {
+            "request": request,
+            "meta": meta,
+            "config": config,
+            "experiences": leadership_data.get("experiences", []),
+            "philosophy": leadership_data.get("philosophy", {}),
+            "metrics": leadership_data.get("metrics", [])
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Leadership Page</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/portfolio/trust-experience")
+async def trust_experience(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("projects", config)
+        return templates.TemplateResponse("case-study-trust-experience.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Trust Experience Case Study</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/portfolio/failing-fast")
+async def failing_fast(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("projects", config)
+        return templates.TemplateResponse("case-study-failing-fast.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Failing Fast Case Study</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/portfolio/north-star")
+async def north_star(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("projects", config)
+        return templates.TemplateResponse("case-study-north-star.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>North Star Case Study</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/portfolio/people-potential")
+async def people_potential(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("projects", config)
+        return templates.TemplateResponse("case-study-people-potential.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>People Potential Case Study</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/blog")
+async def blog(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("blog", config)
+        blog_data = load_data("blog.yaml")
+        return templates.TemplateResponse("blog.html", {
+            "request": request,
+            "meta": meta,
+            "config": config,
+            "posts": blog_data.get("posts", []),
+            "filter_options": blog_data.get("filter_options", {})
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Blog Page</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/interests")
+async def interests(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("interests", config)
+        interests_data = load_data("interests.yaml")
+        return templates.TemplateResponse("interests.html", {
+            "request": request,
+            "meta": meta,
+            "config": config,
+            "interests": interests_data.get("interests", []),
+            "motivations": interests_data.get("motivations", {}),
+            "values": interests_data.get("values", []),
+            "goals": interests_data.get("goals", [])
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Interests Page</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/knowledge")
+async def knowledge(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("knowledge", config)
+        knowledge_data = load_data("knowledge.yaml")
+        return templates.TemplateResponse("knowledge.html", {
+            "request": request,
+            "meta": meta,
+            "config": config,
+            "knowledge_data": knowledge_data,
+            "education": knowledge_data.get("education", []),
+            "certifications": knowledge_data.get("certifications", []),
+            "technical_skills": knowledge_data.get("technical_skills", {}),
+            "learning_philosophy": knowledge_data.get("learning_philosophy", {}),
+            "current_learning": knowledge_data.get("current_learning", [])
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Knowledge Page</h1><p>Debug: {str(e)}</p>", status_code=200)
+
+@app.get("/contact")
+async def contact(request: Request):
+    try:
+        config = get_site_config()
+        meta = get_page_meta("contact", config)
+        return templates.TemplateResponse("contact.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        return HTMLResponse(f"<h1>Contact Page</h1><p>Debug: {str(e)}</p>", status_code=200)
+
 @app.get("/sitemap.xml")
 async def sitemap():
     sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
@@ -109,6 +245,14 @@ async def sitemap():
     </url>
 </urlset>"""
     return HTMLResponse(content=sitemap_xml, media_type="application/xml")
+
+@app.get("/robots.txt")
+async def robots():
+    robots_txt = """User-agent: *
+Allow: /
+
+Sitemap: https://jambuilds.com/sitemap.xml"""
+    return HTMLResponse(content=robots_txt, media_type="text/plain")
 
 # Export app for Vercel
 # Vercel will automatically handle the ASGI interface
