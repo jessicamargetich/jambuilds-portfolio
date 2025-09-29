@@ -6,6 +6,10 @@ import yaml
 import os
 from pathlib import Path
 
+# Get the current directory
+CURRENT_DIR = Path(__file__).parent
+BASE_DIR = CURRENT_DIR.parent
+
 app = FastAPI(
     title="jambuilds.com - Professional Portfolio",
     description="Personal portfolio website showcasing leadership and technical expertise",
@@ -13,16 +17,16 @@ app = FastAPI(
 )
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
 # Set up templates
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # Data loading functions
 def load_data(filename: str) -> dict:
     """Load YAML data file"""
     try:
-        with open(f"data/{filename}", "r") as file:
+        with open(BASE_DIR / "data" / filename, "r") as file:
             return yaml.safe_load(file)
     except FileNotFoundError:
         return {}
@@ -284,7 +288,8 @@ Sitemap: {base_url}/sitemap.xml"""
     return HTMLResponse(content=robots_txt, media_type="text/plain")
 
 # Vercel serverless function handler
-handler = app
+from mangum import Mangum
+handler = Mangum(app)
 
 if __name__ == "__main__":
     import uvicorn
