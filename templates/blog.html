@@ -49,16 +49,19 @@
     flex: 1;
     min-width: 300px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .search-input {
     width: 100%;
-    padding: 16px 50px 16px 20px;
+    padding: 12px 50px 12px 20px;
     border: 2px solid #e2e8f0;
     border-radius: 12px;
     font-size: 16px;
     transition: all 300ms ease;
     background: #f8fafc;
+    height: 48px;
 }
 
 .search-input:focus {
@@ -98,6 +101,7 @@
     transition: all 200ms ease;
     font-weight: 500;
     white-space: nowrap;
+    height: 48px;
 }
 
 .dropdown-trigger:hover {
@@ -684,6 +688,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const visibleCountSpan = document.getElementById('visible-count');
     const activeFiltersContainer = document.getElementById('activeFilters');
 
+    console.log('Blog elements found:', {
+        blogCards: blogCards.length,
+        searchInput: !!searchInput,
+        postsContainer: !!postsContainer,
+        noResults: !!noResults,
+        visibleCountSpan: !!visibleCountSpan,
+        activeFiltersContainer: !!activeFiltersContainer
+    });
+
     // Dropdown functionality
     const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
     const dropdownMenus = document.querySelectorAll('.dropdown-menu');
@@ -726,6 +739,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle filter selection
     const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    console.log('Found checkboxes:', checkboxes.length);
+
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             const value = e.target.value;
@@ -737,6 +752,35 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 activeFilters = activeFilters.filter(f => f.value !== value);
                 e.target.closest('.dropdown-option').classList.remove('active');
+            }
+
+            updateActiveFilters();
+            applyFilters();
+        });
+    });
+
+    // Handle dropdown Clear/Apply buttons
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const dropdown = e.target.closest('.dropdown-menu');
+            const dropdownType = dropdown.getAttribute('data-menu');
+
+            if (e.target.textContent.trim() === 'Clear') {
+                // Clear all checkboxes in this dropdown
+                const dropdownCheckboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdownCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.dropdown-option').classList.remove('active');
+                    // Remove from activeFilters
+                    activeFilters = activeFilters.filter(f => f.value !== cb.value);
+                });
+            } else if (e.target.textContent.trim() === 'Apply') {
+                // Close the dropdown
+                dropdown.classList.remove('active');
+                dropdown.previousElementSibling.classList.remove('active');
             }
 
             updateActiveFilters();
@@ -780,15 +824,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Clear all filters
-    document.querySelector('.clear-all-btn').addEventListener('click', () => {
-        activeFilters = [];
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = true;
-            checkbox.closest('.dropdown-option').classList.remove('active');
+    const clearAllBtn = document.querySelector('.clear-all-btn');
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            activeFilters = [];
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+                checkbox.closest('.dropdown-option').classList.remove('active');
+            });
+            updateActiveFilters();
+            applyFilters();
         });
-        updateActiveFilters();
-        applyFilters();
-    });
+    }
 
     // Apply filters function
     function applyFilters(searchQuery = '') {
@@ -798,10 +845,11 @@ document.addEventListener('DOMContentLoaded', function() {
             theme: []
         };
 
-        // Collect selected filters
+        // Collect only unchecked filters (unchecked means exclude)
         checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
+            if (!checkbox.checked) {
                 const filterType = checkbox.dataset.filter;
+                if (!selectedFilters[filterType]) selectedFilters[filterType] = [];
                 selectedFilters[filterType].push(checkbox.value);
             }
         });
@@ -810,19 +858,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         blogCards.forEach(card => {
             const cardYear = card.dataset.year;
-            const cardFormats = card.dataset.formats.split(',');
-            const cardThemes = card.dataset.themes.split(',');
+            const cardFormats = card.dataset.formats.split(',').map(f => f.trim());
+            const cardThemes = card.dataset.themes.split(',').map(t => t.trim());
             const cardText = card.textContent.toLowerCase();
 
-            // Check if card matches filters
-            const yearMatch = selectedFilters.year.length === 0 || selectedFilters.year.includes(cardYear);
-            const formatMatch = selectedFilters.format.length === 0 ||
-                selectedFilters.format.some(f => cardFormats.includes(f));
-            const themeMatch = selectedFilters.theme.length === 0 ||
-                selectedFilters.theme.some(t => cardThemes.includes(t));
+            // Check if card should be excluded (filtered out)
+            const yearExcluded = selectedFilters.year.includes(cardYear);
+            const formatExcluded = selectedFilters.format.some(f => cardFormats.includes(f));
+            const themeExcluded = selectedFilters.theme.some(t => cardThemes.includes(t));
             const searchMatch = searchQuery === '' || cardText.includes(searchQuery.toLowerCase());
 
-            const shouldShow = yearMatch && formatMatch && themeMatch && searchMatch;
+            const shouldShow = !yearExcluded && !formatExcluded && !themeExcluded && searchMatch;
 
             if (shouldShow) {
                 card.style.display = 'block';
@@ -833,10 +879,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Update visible count
-        visibleCountSpan.textContent = visibleCount;
+        if (visibleCountSpan) {
+            visibleCountSpan.textContent = visibleCount;
+        }
 
         // Show/hide no results message
-        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        console.log('Applied filters:', selectedFilters, 'Visible count:', visibleCount);
     }
 
     // Search functionality
