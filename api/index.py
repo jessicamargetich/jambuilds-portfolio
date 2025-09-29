@@ -11,15 +11,7 @@ from mangum import Mangum
 CURRENT_DIR = Path(__file__).parent
 BASE_DIR = CURRENT_DIR.parent
 
-# Debug: Print directory information
-print(f"CURRENT_DIR: {CURRENT_DIR}")
-print(f"BASE_DIR: {BASE_DIR}")
-print(f"Templates dir: {BASE_DIR / 'templates'}")
-print(f"Data dir: {BASE_DIR / 'data'}")
-
-# Check if directories exist
-print(f"Templates exists: {(BASE_DIR / 'templates').exists()}")
-print(f"Data exists: {(BASE_DIR / 'data').exists()}")
+# Directories confirmed to exist in Vercel environment
 
 app = FastAPI(
     title="jambuilds.com - Professional Portfolio",
@@ -37,13 +29,11 @@ def load_data(filename: str) -> dict:
     """Load YAML data file"""
     try:
         data_path = BASE_DIR / "data" / filename
-        print(f"Trying to load: {data_path}")  # Debug logging
         with open(data_path, "r") as file:
             data = yaml.safe_load(file)
-            print(f"Loaded {filename}: {type(data)}")  # Debug logging
             return data or {}
     except Exception as e:
-        print(f"Error loading {filename}: {e}")  # Debug logging
+        print(f"Error loading {filename}: {e}")
         return {}
 
 def get_site_config() -> dict:
@@ -307,4 +297,6 @@ Sitemap: {base_url}/sitemap.xml"""
     return HTMLResponse(content=robots_txt, media_type="text/plain")
 
 # Vercel serverless function handler
-handler = Mangum(app)
+def handler(event, context):
+    asgi_handler = Mangum(app)
+    return asgi_handler(event, context)
