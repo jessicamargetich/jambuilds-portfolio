@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormHandling();
     initAccessibility();
     initBlogFilters();
-    initParallaxScrolling();
 });
 
 // Navigation functionality
@@ -544,79 +543,6 @@ function initBlogFilters() {
         const year = date.getFullYear();
         return `${day} ${month} ${year}`;
     }
-}
-
-// Parallax scrolling for timeline
-function initParallaxScrolling() {
-    const parallaxItems = document.querySelectorAll('.parallax-item');
-    const parallaxMarkers = document.querySelectorAll('.parallax-marker');
-
-    if (parallaxItems.length === 0) return; // Not on timeline page
-
-    let ticking = false;
-
-    function updateParallax() {
-        const scrollTop = window.pageYOffset;
-        const windowHeight = window.innerHeight;
-
-        // Update parallax items
-        parallaxItems.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            const speed = parseFloat(item.dataset.speed) || 0.5;
-
-            // Check if element is in viewport
-            if (rect.bottom >= 0 && rect.top <= windowHeight) {
-                const yPos = -(scrollTop * speed);
-                item.style.transform = `translate3d(0, ${yPos}px, 0)`;
-            }
-        });
-
-        // Update parallax markers with different speeds
-        parallaxMarkers.forEach(marker => {
-            const rect = marker.getBoundingClientRect();
-            const speed = parseFloat(marker.dataset.speed) || 0.3;
-
-            // Check if element is in viewport
-            if (rect.bottom >= 0 && rect.top <= windowHeight) {
-                const yPos = -(scrollTop * speed);
-                marker.style.transform = `translate3d(0, ${yPos}px, 0)`;
-            }
-        });
-
-        ticking = false;
-    }
-
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-
-    // Add scroll event listener with debouncing
-    window.addEventListener('scroll', requestTick, { passive: true });
-
-    // Initial call
-    updateParallax();
-
-    // Add intersection observer for better performance
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('parallax-active');
-            } else {
-                entry.target.classList.remove('parallax-active');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '50px 0px'
-    });
-
-    // Observe all parallax elements
-    [...parallaxItems, ...parallaxMarkers].forEach(element => {
-        observer.observe(element);
-    });
 }
 
 // Export functions for potential external use

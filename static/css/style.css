@@ -2268,66 +2268,6 @@ section {
     transition: transform 0.3s ease-out;
 }
 
-/* Timeline Parallax Effects */
-.parallax-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.parallax-item {
-    will-change: transform;
-    transition: transform 0.1s ease-out;
-}
-
-.parallax-marker {
-    will-change: transform;
-    transition: transform 0.1s ease-out;
-}
-
-/* Enhanced timeline for parallax */
-.timeline {
-    position: relative;
-    perspective: 1000px;
-}
-
-.timeline-item {
-    transform-style: preserve-3d;
-}
-
-/* Parallax performance optimization */
-.parallax-item,
-.parallax-marker {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-/* Enhanced parallax effects */
-.parallax-active {
-    opacity: 1;
-}
-
-.parallax-item:not(.parallax-active) {
-    opacity: 0.7;
-    transition: opacity 0.5s ease;
-}
-
-/* Responsive parallax - disable on mobile for performance */
-@media (max-width: 768px) {
-    .parallax-item,
-    .parallax-marker {
-        transform: none !important;
-    }
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .parallax-item,
-    .parallax-marker {
-        transform: none !important;
-        transition: none;
-    }
-}
-
 /* Enhanced navigation micro-interactions */
 .nav-link {
     position: relative;
