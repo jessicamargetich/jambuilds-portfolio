@@ -1,126 +1,664 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="page-header" role="banner">
-    <div class="container">
-        <h1 class="page-title">Blog & Insights</h1>
-        <p class="page-subtitle">Data-driven insights on product leadership, AI strategy, and organizational transformation</p>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+/* Blog Filter Variation 3: Dropdown/Modal Layout Styles */
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.blog-subtitle {
+    font-size: 20px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Compact Filter Bar */
+.filter-bar {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 20px 32px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.search-container {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 300ms ease;
+    background: #f8fafc;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: white;
+}
+
+.search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.filter-dropdown {
+    position: relative;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.dropdown-trigger:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.dropdown-trigger.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    min-width: 250px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 300ms ease;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.dropdown-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.dropdown-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.dropdown-content {
+    padding: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-section {
+    margin-bottom: 20px;
+}
+
+.dropdown-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dropdown-options {
+    display: grid;
+    gap: 8px;
+}
+
+.dropdown-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-size: 14px;
+}
+
+.dropdown-option:hover {
+    background: #f1f5f9;
+}
+
+.dropdown-option.active {
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.dropdown-option input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+.dropdown-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.dropdown-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dropdown-btn:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.dropdown-btn.primary {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+.dropdown-btn.primary:hover {
+    background: #1e40af;
+}
+
+.filter-button {
+    padding: 12px 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-button:hover {
+    background: #1e40af;
+    transform: translateY(-1px);
+}
+
+.active-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-tag {
+    background: #2563eb;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-tag button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.clear-all-btn {
+    background: #f59e0b;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #2563eb 0%, #f59e0b 100%);
+}
+
+.blog-card-content {
+    padding: 24px;
+}
+
+.blog-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.blog-card-excerpt {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.blog-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.blog-card-tag {
+    background: #f59e0b;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 400ms ease;
+    position: relative;
+}
+
+.modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    padding: 32px;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.modal-close:hover {
+    background: #2563eb;
+    color: white;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 32px;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-container {
+        min-width: auto;
+    }
+
+    .filter-controls {
+        justify-content: space-between;
+    }
+
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Posts specific styling */
+.posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.posts-count {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+}
+
+.no-results h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+</style>
+
+<div class="blog-container">
+    <div class="blog-header">
+        <h1 class="blog-title">Blog & Insights</h1>
+        <p class="blog-subtitle">Leadership thoughts, technical deep-dives, and strategic perspectives</p>
     </div>
-</section>
 
-<!-- Blog Filters -->
-<section class="blog-filters" role="region" aria-labelledby="filters-title">
-    <div class="container">
-        <h2 id="filters-title" class="sr-only">Filter Posts</h2>
-        <div class="filters-container">
-            <div class="filter-group">
-                <label for="year-filter" class="filter-label">Year:</label>
-                <div class="filter-options" id="year-filter">
-                    {% for year in filter_options.years %}
-                    <label class="filter-checkbox">
-                        <input type="checkbox" value="{{ year }}" data-filter="year" checked>
-                        <span>{{ year }}</span>
-                    </label>
-                    {% endfor %}
+    <div class="filter-bar">
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search articles by title, content, or tags...">
+            <i data-lucide="search" class="search-icon" style="width: 20px; height: 20px;"></i>
+        </div>
+
+        <div class="filter-controls">
+            <div class="filter-dropdown">
+                <div class="dropdown-trigger" data-dropdown="year">
+                    <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
+                    <span>Year</span>
+                    <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div class="dropdown-menu" data-menu="year">
+                    <div class="dropdown-header">
+                        <div class="dropdown-title">Filter by Year</div>
+                        <div class="dropdown-subtitle">Select publication years</div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-section">
+                            <div class="section-title">Publication Year</div>
+                            <div class="dropdown-options">
+                                {% for year in filter_options.years %}
+                                <label class="dropdown-option">
+                                    <input type="checkbox" value="{{ year }}" data-filter="year" checked>
+                                    <span>{{ year }} ({% for post in posts if post.creation_date[:4] == year|string %}{% if loop.first %}{{ loop.length }}{% endif %}{% endfor %} articles)</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <button class="dropdown-btn">Clear</button>
+                        <button class="dropdown-btn primary">Apply</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="filter-group">
-                <label for="format-filter" class="filter-label">Content Format:</label>
-                <div class="filter-options" id="format-filter">
-                    {% for format in filter_options.content_formats %}
-                    <label class="filter-checkbox">
-                        <input type="checkbox" value="{{ format }}" data-filter="format" checked>
-                        <span>{{ format }}</span>
-                    </label>
-                    {% endfor %}
+            <div class="filter-dropdown">
+                <div class="dropdown-trigger" data-dropdown="format">
+                    <i data-lucide="file-type" style="width: 16px; height: 16px;"></i>
+                    <span>Format</span>
+                    <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div class="dropdown-menu" data-menu="format">
+                    <div class="dropdown-header">
+                        <div class="dropdown-title">Filter by Format</div>
+                        <div class="dropdown-subtitle">Select content types</div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-section">
+                            <div class="section-title">Content Type</div>
+                            <div class="dropdown-options">
+                                {% for format in filter_options.content_formats %}
+                                <label class="dropdown-option">
+                                    <input type="checkbox" value="{{ format }}" data-filter="format" checked>
+                                    <span>{{ format }} ({% set count = 0 %}{% for post in posts %}{% for post_format in post.content_format %}{% if post_format == format %}{% set count = count + 1 %}{% endif %}{% endfor %}{% endfor %}{{ count }})</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <button class="dropdown-btn">Clear</button>
+                        <button class="dropdown-btn primary">Apply</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="filter-group">
-                <label for="theme-filter" class="filter-label">Theme:</label>
-                <div class="filter-options" id="theme-filter">
-                    {% for theme in filter_options.themes %}
-                    <label class="filter-checkbox">
-                        <input type="checkbox" value="{{ theme }}" data-filter="theme" checked>
-                        <span>{{ theme }}</span>
-                    </label>
-                    {% endfor %}
+            <div class="filter-dropdown">
+                <div class="dropdown-trigger" data-dropdown="topic">
+                    <i data-lucide="tags" style="width: 16px; height: 16px;"></i>
+                    <span>Topics</span>
+                    <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div class="dropdown-menu" data-menu="topic">
+                    <div class="dropdown-header">
+                        <div class="dropdown-title">Filter by Topic</div>
+                        <div class="dropdown-subtitle">Select areas of focus</div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-section">
+                            <div class="section-title">Business</div>
+                            <div class="dropdown-options">
+                                {% for theme in filter_options.themes %}
+                                {% if theme in ['Leadership', 'Strategy', 'Process', 'Transformation'] %}
+                                <label class="dropdown-option">
+                                    <input type="checkbox" value="{{ theme }}" data-filter="theme" checked>
+                                    <span>{{ theme }} ({% set count = 0 %}{% for post in posts %}{% for post_theme in post.themes %}{% if post_theme == theme %}{% set count = count + 1 %}{% endif %}{% endfor %}{% endfor %}{{ count }})</span>
+                                </label>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="section-title">Technical</div>
+                            <div class="dropdown-options">
+                                {% for theme in filter_options.themes %}
+                                {% if theme in ['Product', 'AI/ML', 'Data'] %}
+                                <label class="dropdown-option">
+                                    <input type="checkbox" value="{{ theme }}" data-filter="theme" checked>
+                                    <span>{{ theme }} ({% set count = 0 %}{% for post in posts %}{% for post_theme in post.themes %}{% if post_theme == theme %}{% set count = count + 1 %}{% endif %}{% endfor %}{% endfor %}{{ count }})</span>
+                                </label>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <button class="dropdown-btn">Clear</button>
+                        <button class="dropdown-btn primary">Apply</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="filter-actions">
-                <button id="clear-filters" class="btn btn-secondary">Clear All</button>
-                <button id="select-all-filters" class="btn btn-secondary">Select All</button>
-            </div>
+            <button class="filter-button">
+                <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i>
+                More Filters
+            </button>
+        </div>
+
+        <div class="active-filters" id="activeFilters" style="display: none;">
+            <span style="font-size: 14px; color: #64748b; font-weight: 500;">Active filters:</span>
+            <button class="clear-all-btn">Clear All</button>
         </div>
     </div>
-</section>
 
-<!-- Blog Posts -->
-<section class="blog-posts" role="region" aria-labelledby="posts-title">
-    <div class="container">
-        <div class="posts-header">
-            <h2 id="posts-title" class="section-title">Professional Insights</h2>
-            <div class="posts-count">
-                <span id="visible-count">{{ posts|length }}</span> of {{ posts|length }} posts
-            </div>
-        </div>
-
-        <div class="blog-posts-grid" id="posts-container">
-            {% for post in posts %}
-            <article class="blog-post"
-                     data-year="{{ post.creation_date[:4] }}"
-                     data-formats="{{ post.content_format|join(',') }}"
-                     data-themes="{{ post.themes|join(',') }}">
-                <header class="post-header">
-                    <div class="post-meta">
-                        <time datetime="{{ post.creation_date }}">
-                            {% set date_parts = post.creation_date.split('-') %}
-                            {% set months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
-                            {{ date_parts[2]|int }} {{ months[date_parts[1]|int] }} {{ date_parts[0] }}
-                        </time>
-                        <span class="post-read-time">{{ post.read_time }}</span>
-                    </div>
-                    <h3 class="post-title">{{ post.title }}</h3>
-                    <p class="post-excerpt">{{ post.excerpt }}</p>
-                </header>
-
-                <div class="post-tags">
-                    <div class="content-formats">
-                        {% for format in post.content_format %}
-                        <span class="tag format-tag">{{ format }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="themes">
-                        {% for theme in post.themes %}
-                        <span class="tag theme-tag">{{ theme }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="post-actions">
-                    <button class="read-more-btn" data-post-id="{{ post.id }}">
-                        Read Full Article
-                    </button>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-
-        <div id="no-results" class="no-results" style="display: none;">
-            <h3>No posts match your filters</h3>
-            <p>Try adjusting your filter criteria to see more content.</p>
+    <div class="posts-header">
+        <h2 class="section-title">Professional Insights</h2>
+        <div class="posts-count">
+            <span id="visible-count">{{ posts|length }}</span> of {{ posts|length }} posts
         </div>
     </div>
-</section>
+
+    <div class="blog-grid" id="posts-container">
+        {% for post in posts %}
+        <article class="blog-card"
+                 data-year="{{ post.creation_date[:4] }}"
+                 data-formats="{{ post.content_format|join(',') }}"
+                 data-themes="{{ post.themes|join(',') }}">
+            <div class="blog-card-image"></div>
+            <div class="blog-card-content">
+                <h3 class="blog-card-title">{{ post.title }}</h3>
+                <p class="blog-card-excerpt">{{ post.excerpt }}</p>
+                <div class="blog-card-meta">
+                    <span>
+                        {% set date_parts = post.creation_date.split('-') %}
+                        {% set months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
+                        {{ months[date_parts[1]|int] }} {{ date_parts[0] }} • {{ post.read_time }}
+                    </span>
+                    <span class="blog-card-tag">{{ post.themes[0] if post.themes else 'Article' }}</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div id="no-results" class="no-results" style="display: none;">
+        <h3>No articles found matching your criteria</h3>
+        <p>Try adjusting your filter criteria to see more content.</p>
+    </div>
+</div>
 
 <!-- Post Modal -->
 <div id="post-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <h2 id="modal-title" class="modal-post-title"></h2>
-            <button class="modal-close" aria-label="Close article">&times;</button>
+            <button class="modal-close" aria-label="Close article">
+                <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+            </button>
         </div>
         <div class="modal-body">
             <div class="modal-meta">
@@ -133,92 +671,184 @@
     </div>
 </div>
 
-<section class="topics" role="region" aria-labelledby="topics-title">
-    <div class="container">
-        <h2 id="topics-title" class="section-title">Topics I Write About</h2>
-        <div class="topics-grid">
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                </div>
-                <h3>Leadership & Management</h3>
-                <p>Building and scaling high-performing engineering teams, managing technical debt, and fostering innovation culture.</p>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                    </svg>
-                </div>
-                <h3>Technology & Architecture</h3>
-                <p>Modern software architecture, cloud infrastructure, DevOps practices, and emerging technology trends.</p>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
-                    </svg>
-                </div>
-                <h3>Career Development</h3>
-                <p>Growing from individual contributor to technical leader, mentoring strategies, and building technical expertise.</p>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-                    </svg>
-                </div>
-                <h3>Industry Insights</h3>
-                <p>Digital transformation trends, startup vs enterprise culture, and the future of software development.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="newsletter" role="region" aria-labelledby="newsletter-title">
-    <div class="container">
-        <div class="newsletter-content">
-            <h2 id="newsletter-title">Stay Connected</h2>
-            <p>
-                Follow my latest thoughts and insights on leadership and technology.
-                Connect with me on LinkedIn for regular updates and professional discussions.
-            </p>
-            <div class="newsletter-actions">
-                <a href="{{ config.social.linkedin }}" class="btn btn-primary" target="_blank" rel="noopener">
-                    Follow on LinkedIn
-                </a>
-                <a href="/contact" class="btn btn-secondary">
-                    Get In Touch
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- LinkedIn Integration Script Placeholder -->
 <script>
-// Placeholder for LinkedIn API integration
-// This would be replaced with actual LinkedIn API calls or RSS feed parsing
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Future: Implement LinkedIn post fetching
-    console.log('LinkedIn integration ready for implementation');
-});
+    // Initialize Lucide icons
+    lucide.createIcons();
 
-// Function to dynamically load LinkedIn posts (placeholder)
-async function loadLinkedInPosts() {
-    // This would connect to LinkedIn API or RSS feed
-    // For now, we're using static content
-    console.log('LinkedIn posts loaded (placeholder)');
-}
+    // Blog functionality
+    const blogCards = document.querySelectorAll('.blog-card');
+    const searchInput = document.getElementById('searchInput');
+    const postsContainer = document.getElementById('posts-container');
+    const noResults = document.getElementById('no-results');
+    const visibleCountSpan = document.getElementById('visible-count');
+    const activeFiltersContainer = document.getElementById('activeFilters');
+
+    // Dropdown functionality
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+    const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+    let activeFilters = [];
+
+    dropdownTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetMenu = trigger.dataset.dropdown;
+            const menu = document.querySelector(`[data-menu="${targetMenu}"]`);
+
+            // Close other dropdowns
+            dropdownMenus.forEach(m => {
+                if (m !== menu) {
+                    m.classList.remove('active');
+                    m.previousElementSibling.classList.remove('active');
+                }
+            });
+
+            // Toggle current dropdown
+            menu.classList.toggle('active');
+            trigger.classList.toggle('active');
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        dropdownMenus.forEach(menu => {
+            menu.classList.remove('active');
+            menu.previousElementSibling.classList.remove('active');
+        });
+    });
+
+    // Prevent dropdown close when clicking inside
+    dropdownMenus.forEach(menu => {
+        menu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+
+    // Handle filter selection
+    const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const value = e.target.value;
+            const label = e.target.nextElementSibling.textContent;
+
+            if (e.target.checked) {
+                activeFilters.push({ value, label });
+                e.target.closest('.dropdown-option').classList.add('active');
+            } else {
+                activeFilters = activeFilters.filter(f => f.value !== value);
+                e.target.closest('.dropdown-option').classList.remove('active');
+            }
+
+            updateActiveFilters();
+            applyFilters();
+        });
+    });
+
+    function updateActiveFilters() {
+        if (activeFilters.length > 0) {
+            activeFiltersContainer.style.display = 'flex';
+            const existingTags = activeFiltersContainer.querySelectorAll('.filter-tag');
+            existingTags.forEach(tag => tag.remove());
+
+            activeFilters.forEach(filter => {
+                const tag = document.createElement('div');
+                tag.className = 'filter-tag';
+                tag.innerHTML = `
+                    ${filter.label}
+                    <button onclick="removeFilter('${filter.value}')">
+                        <i data-lucide="x" style="width: 12px; height: 12px;"></i>
+                    </button>
+                `;
+                activeFiltersContainer.insertBefore(tag, activeFiltersContainer.lastElementChild);
+            });
+
+            lucide.createIcons();
+        } else {
+            activeFiltersContainer.style.display = 'none';
+        }
+    }
+
+    window.removeFilter = function(value) {
+        activeFilters = activeFilters.filter(f => f.value !== value);
+        const checkbox = document.querySelector(`input[value="${value}"]`);
+        if (checkbox) {
+            checkbox.checked = false;
+            checkbox.closest('.dropdown-option').classList.remove('active');
+        }
+        updateActiveFilters();
+        applyFilters();
+    }
+
+    // Clear all filters
+    document.querySelector('.clear-all-btn').addEventListener('click', () => {
+        activeFilters = [];
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true;
+            checkbox.closest('.dropdown-option').classList.remove('active');
+        });
+        updateActiveFilters();
+        applyFilters();
+    });
+
+    // Apply filters function
+    function applyFilters(searchQuery = '') {
+        const selectedFilters = {
+            year: [],
+            format: [],
+            theme: []
+        };
+
+        // Collect selected filters
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const filterType = checkbox.dataset.filter;
+                selectedFilters[filterType].push(checkbox.value);
+            }
+        });
+
+        let visibleCount = 0;
+
+        blogCards.forEach(card => {
+            const cardYear = card.dataset.year;
+            const cardFormats = card.dataset.formats.split(',');
+            const cardThemes = card.dataset.themes.split(',');
+            const cardText = card.textContent.toLowerCase();
+
+            // Check if card matches filters
+            const yearMatch = selectedFilters.year.length === 0 || selectedFilters.year.includes(cardYear);
+            const formatMatch = selectedFilters.format.length === 0 ||
+                selectedFilters.format.some(f => cardFormats.includes(f));
+            const themeMatch = selectedFilters.theme.length === 0 ||
+                selectedFilters.theme.some(t => cardThemes.includes(t));
+            const searchMatch = searchQuery === '' || cardText.includes(searchQuery.toLowerCase());
+
+            const shouldShow = yearMatch && formatMatch && themeMatch && searchMatch;
+
+            if (shouldShow) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Update visible count
+        visibleCountSpan.textContent = visibleCount;
+
+        // Show/hide no results message
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+        applyFilters(e.target.value);
+    });
+
+    // Initialize with all filters selected
+    applyFilters();
+
+    console.log('Blog Filter Variation 3 (Dropdown/Modal Layout) loaded successfully');
+});
 </script>
+
 {% endblock %}

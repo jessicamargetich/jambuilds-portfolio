@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Filter Variation 3: Dropdown/Modal Layout - SuperDesign</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog_theme_1.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            min-height: 100vh !important;
+            line-height: 1.6 !important;
+            padding: 40px 20px !important;
+        }
+
+        .blog-container {
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+        }
+
+        .blog-header {
+            text-align: center !important;
+            margin-bottom: 40px !important;
+        }
+
+        .blog-title {
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            margin-bottom: 16px !important;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        .blog-subtitle {
+            font-size: 20px !important;
+            color: #64748b !important;
+            font-weight: 500 !important;
+        }
+
+        /* Compact Filter Bar */
+        .filter-bar {
+            background: white !important;
+            border-radius: 16px !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            padding: 20px 32px !important;
+            margin-bottom: 32px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .search-container {
+            flex: 1 !important;
+            min-width: 300px !important;
+            position: relative !important;
+        }
+
+        .search-input {
+            width: 100% !important;
+            padding: 16px 50px 16px 20px !important;
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            font-size: 16px !important;
+            transition: all 300ms ease !important;
+            background: #f8fafc !important;
+        }
+
+        .search-input:focus {
+            outline: none !important;
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+            background: white !important;
+        }
+
+        .search-icon {
+            position: absolute !important;
+            right: 16px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: #64748b !important;
+        }
+
+        .filter-controls {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+        }
+
+        .filter-dropdown {
+            position: relative !important;
+        }
+
+        .dropdown-trigger {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 12px 20px !important;
+            background: #f8fafc !important;
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-weight: 500 !important;
+            white-space: nowrap !important;
+        }
+
+        .dropdown-trigger:hover {
+            border-color: #2563eb !important;
+            background: #eff6ff !important;
+        }
+
+        .dropdown-trigger.active {
+            background: #2563eb !important;
+            color: white !important;
+            border-color: #2563eb !important;
+        }
+
+        .dropdown-menu {
+            position: absolute !important;
+            top: calc(100% + 8px) !important;
+            left: 0 !important;
+            background: white !important;
+            border-radius: 16px !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+            border: 1px solid #e2e8f0 !important;
+            min-width: 250px !important;
+            z-index: 1000 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(-10px) !important;
+            transition: all 300ms ease !important;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+
+        .dropdown-header {
+            padding: 20px 24px 16px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        .dropdown-title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            margin-bottom: 4px !important;
+        }
+
+        .dropdown-subtitle {
+            font-size: 14px !important;
+            color: #64748b !important;
+        }
+
+        .dropdown-content {
+            padding: 16px !important;
+            max-height: 300px !important;
+            overflow-y: auto !important;
+        }
+
+        .dropdown-section {
+            margin-bottom: 20px !important;
+        }
+
+        .dropdown-section:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .section-title {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: #374151 !important;
+            margin-bottom: 12px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .dropdown-options {
+            display: grid !important;
+            gap: 8px !important;
+        }
+
+        .dropdown-option {
+            display: flex !important;
+            align-items: center !important;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-size: 14px !important;
+        }
+
+        .dropdown-option:hover {
+            background: #f1f5f9 !important;
+        }
+
+        .dropdown-option.active {
+            background: #eff6ff !important;
+            color: #2563eb !important;
+            font-weight: 500 !important;
+        }
+
+        .dropdown-option input[type="checkbox"] {
+            margin-right: 8px !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+
+        .dropdown-footer {
+            padding: 16px 24px !important;
+            border-top: 1px solid #e2e8f0 !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            gap: 12px !important;
+        }
+
+        .dropdown-btn {
+            flex: 1 !important;
+            padding: 10px !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            background: white !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .dropdown-btn:hover {
+            border-color: #2563eb !important;
+            color: #2563eb !important;
+        }
+
+        .dropdown-btn.primary {
+            background: #2563eb !important;
+            color: white !important;
+            border-color: #2563eb !important;
+        }
+
+        .dropdown-btn.primary:hover {
+            background: #1e40af !important;
+        }
+
+        .filter-button {
+            padding: 12px 20px !important;
+            background: #2563eb !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-weight: 500 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .filter-button:hover {
+            background: #1e40af !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .active-filters {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-top: 16px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .filter-tag {
+            background: #2563eb !important;
+            color: white !important;
+            padding: 6px 12px !important;
+            border-radius: 20px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+
+        .filter-tag button {
+            background: none !important;
+            border: none !important;
+            color: white !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .clear-all-btn {
+            background: #f59e0b !important;
+            color: white !important;
+            padding: 6px 12px !important;
+            border: none !important;
+            border-radius: 20px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+        }
+
+        .blog-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+            gap: 24px !important;
+        }
+
+        .blog-card {
+            background: white !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            transition: all 300ms ease !important;
+            cursor: pointer !important;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .blog-card-image {
+            width: 100% !important;
+            height: 200px !important;
+            background: linear-gradient(135deg, #2563eb 0%, #f59e0b 100%) !important;
+        }
+
+        .blog-card-content {
+            padding: 24px !important;
+        }
+
+        .blog-card-title {
+            font-size: 20px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            margin-bottom: 12px !important;
+            line-height: 1.3 !important;
+        }
+
+        .blog-card-excerpt {
+            color: #64748b !important;
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            margin-bottom: 16px !important;
+        }
+
+        .blog-card-meta {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            font-size: 12px !important;
+            color: #94a3b8 !important;
+        }
+
+        .blog-card-tag {
+            background: #f59e0b !important;
+            color: white !important;
+            padding: 4px 12px !important;
+            border-radius: 8px !important;
+            font-size: 11px !important;
+            font-weight: 500 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-bar {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
+            .search-container {
+                min-width: auto !important;
+            }
+
+            .filter-controls {
+                justify-content: space-between !important;
+            }
+
+            .dropdown-menu {
+                right: 0 !important;
+                left: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-header">
+            <h1 class="blog-title">Blog & Insights</h1>
+            <p class="blog-subtitle">Leadership thoughts, technical deep-dives, and strategic perspectives</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search articles by title, content, or tags...">
+                <i data-lucide="search" class="search-icon" style="width: 20px; height: 20px;"></i>
+            </div>
+
+            <div class="filter-controls">
+                <div class="filter-dropdown">
+                    <div class="dropdown-trigger" data-dropdown="year">
+                        <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
+                        <span>Year</span>
+                        <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                    </div>
+                    <div class="dropdown-menu" data-menu="year">
+                        <div class="dropdown-header">
+                            <div class="dropdown-title">Filter by Year</div>
+                            <div class="dropdown-subtitle">Select publication years</div>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-section">
+                                <div class="section-title">Publication Year</div>
+                                <div class="dropdown-options">
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="2024">
+                                        <span>2024 (4 articles)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="2023">
+                                        <span>2023 (3 articles)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-footer">
+                            <button class="dropdown-btn">Clear</button>
+                            <button class="dropdown-btn primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-dropdown">
+                    <div class="dropdown-trigger" data-dropdown="format">
+                        <i data-lucide="file-type" style="width: 16px; height: 16px;"></i>
+                        <span>Format</span>
+                        <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                    </div>
+                    <div class="dropdown-menu" data-menu="format">
+                        <div class="dropdown-header">
+                            <div class="dropdown-title">Filter by Format</div>
+                            <div class="dropdown-subtitle">Select content types</div>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-section">
+                                <div class="section-title">Content Type</div>
+                                <div class="dropdown-options">
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="text">
+                                        <span>Text Articles (6)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="video">
+                                        <span>Video Content (2)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="image">
+                                        <span>Visual Content (3)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="charts">
+                                        <span>Data & Charts (2)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-footer">
+                            <button class="dropdown-btn">Clear</button>
+                            <button class="dropdown-btn primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-dropdown">
+                    <div class="dropdown-trigger" data-dropdown="topic">
+                        <i data-lucide="tags" style="width: 16px; height: 16px;"></i>
+                        <span>Topics</span>
+                        <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+                    </div>
+                    <div class="dropdown-menu" data-menu="topic">
+                        <div class="dropdown-header">
+                            <div class="dropdown-title">Filter by Topic</div>
+                            <div class="dropdown-subtitle">Select areas of focus</div>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-section">
+                                <div class="section-title">Business</div>
+                                <div class="dropdown-options">
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="leadership">
+                                        <span>Leadership (4)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="strategy">
+                                        <span>Strategy (3)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="dropdown-section">
+                                <div class="section-title">Technical</div>
+                                <div class="dropdown-options">
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="product">
+                                        <span>Product (3)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="ai-ml">
+                                        <span>AI/ML (2)</span>
+                                    </label>
+                                    <label class="dropdown-option">
+                                        <input type="checkbox" value="data">
+                                        <span>Data (3)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-footer">
+                            <button class="dropdown-btn">Clear</button>
+                            <button class="dropdown-btn primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="filter-button">
+                    <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i>
+                    More Filters
+                </button>
+            </div>
+
+            <div class="active-filters" id="activeFilters" style="display: none;">
+                <span style="font-size: 14px; color: #64748b; font-weight: 500;">Active filters:</span>
+                <button class="clear-all-btn">Clear All</button>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-card-image"></div>
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title">How ML Transformed Payment Success Rates by 23%</h3>
+                    <p class="blog-card-excerpt">Deep dive into implementing machine learning algorithms to optimize payment processing, reducing involuntary churn and improving customer satisfaction...</p>
+                    <div class="blog-card-meta">
+                        <span>Nov 2024 • 8 min read</span>
+                        <span class="blog-card-tag">AI/ML</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image"></div>
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title">Building High-Performance Teams in Remote-First Organizations</h3>
+                    <p class="blog-card-excerpt">Lessons from scaling global teams at Walmart and sticky.io, focusing on communication, culture, and creating psychological safety...</p>
+                    <div class="blog-card-meta">
+                        <span>Oct 2024 • 12 min read</span>
+                        <span class="blog-card-tag">Leadership</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image"></div>
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title">The Product Analytics Stack That Drove $650M Revenue</h3>
+                    <p class="blog-card-excerpt">How we built a comprehensive analytics infrastructure to measure, optimize, and scale omnichannel experiences across 82M households...</p>
+                    <div class="blog-card-meta">
+                        <span>Dec 2023 • 15 min read</span>
+                        <span class="blog-card-tag">Product</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Dropdown functionality
+        const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        const activeFiltersContainer = document.getElementById('activeFilters');
+        let activeFilters = [];
+
+        dropdownTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const targetMenu = trigger.dataset.dropdown;
+                const menu = document.querySelector(`[data-menu="${targetMenu}"]`);
+
+                // Close other dropdowns
+                dropdownMenus.forEach(m => {
+                    if (m !== menu) {
+                        m.classList.remove('active');
+                        m.previousElementSibling.classList.remove('active');
+                    }
+                });
+
+                // Toggle current dropdown
+                menu.classList.toggle('active');
+                trigger.classList.toggle('active');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenus.forEach(menu => {
+                menu.classList.remove('active');
+                menu.previousElementSibling.classList.remove('active');
+            });
+        });
+
+        // Prevent dropdown close when clicking inside
+        dropdownMenus.forEach(menu => {
+            menu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
+        // Handle filter selection
+        const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const value = e.target.value;
+                const label = e.target.nextElementSibling.textContent;
+
+                if (e.target.checked) {
+                    activeFilters.push({ value, label });
+                    e.target.closest('.dropdown-option').classList.add('active');
+                } else {
+                    activeFilters = activeFilters.filter(f => f.value !== value);
+                    e.target.closest('.dropdown-option').classList.remove('active');
+                }
+
+                updateActiveFilters();
+            });
+        });
+
+        function updateActiveFilters() {
+            if (activeFilters.length > 0) {
+                activeFiltersContainer.style.display = 'flex';
+                const existingTags = activeFiltersContainer.querySelectorAll('.filter-tag');
+                existingTags.forEach(tag => tag.remove());
+
+                activeFilters.forEach(filter => {
+                    const tag = document.createElement('div');
+                    tag.className = 'filter-tag';
+                    tag.innerHTML = `
+                        ${filter.label}
+                        <button onclick="removeFilter('${filter.value}')">
+                            <i data-lucide="x" style="width: 12px; height: 12px;"></i>
+                        </button>
+                    `;
+                    activeFiltersContainer.insertBefore(tag, activeFiltersContainer.lastElementChild);
+                });
+
+                lucide.createIcons();
+            } else {
+                activeFiltersContainer.style.display = 'none';
+            }
+        }
+
+        function removeFilter(value) {
+            activeFilters = activeFilters.filter(f => f.value !== value);
+            const checkbox = document.querySelector(`input[value="${value}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+                checkbox.closest('.dropdown-option').classList.remove('active');
+            }
+            updateActiveFilters();
+        }
+
+        // Clear all filters
+        document.querySelector('.clear-all-btn').addEventListener('click', () => {
+            activeFilters = [];
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.closest('.dropdown-option').classList.remove('active');
+            });
+            updateActiveFilters();
+        });
+
+        console.log('Blog Filter Variation 3 (Dropdown/Modal Layout) loaded successfully');
+    </script>
+</body>
+</html>

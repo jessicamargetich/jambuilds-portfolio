@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Filter Variation 1: Sidebar Layout - SuperDesign</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog_theme_1.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            min-height: 100vh !important;
+            line-height: 1.6 !important;
+        }
+
+        .blog-container {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 40px 20px !important;
+        }
+
+        .blog-header {
+            text-align: center !important;
+            margin-bottom: 60px !important;
+        }
+
+        .blog-title {
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            margin-bottom: 16px !important;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+        }
+
+        .blog-subtitle {
+            font-size: 20px !important;
+            color: #64748b !important;
+            font-weight: 500 !important;
+        }
+
+        .blog-layout {
+            display: grid !important;
+            grid-template-columns: 300px 1fr !important;
+            gap: 32px !important;
+            min-height: 100vh !important;
+        }
+
+        /* Sidebar Filter */
+        .filter-sidebar {
+            background: white !important;
+            border-radius: 20px !important;
+            padding: 32px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            height: fit-content !important;
+            position: sticky !important;
+            top: 40px !important;
+        }
+
+        .filter-header {
+            margin-bottom: 32px !important;
+        }
+
+        .filter-title {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #1e293b !important;
+            margin-bottom: 16px !important;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        .search-container {
+            position: relative !important;
+            margin-bottom: 24px !important;
+        }
+
+        .search-input {
+            width: 100% !important;
+            padding: 12px 40px 12px 16px !important;
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            font-size: 14px !important;
+            transition: all 300ms ease !important;
+            background: #f8fafc !important;
+        }
+
+        .search-input:focus {
+            outline: none !important;
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+            background: white !important;
+        }
+
+        .search-icon {
+            position: absolute !important;
+            right: 12px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: #64748b !important;
+        }
+
+        .filter-group {
+            margin-bottom: 32px !important;
+        }
+
+        .filter-group-title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            margin-bottom: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .filter-options {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+
+        .filter-checkbox {
+            display: flex !important;
+            align-items: center !important;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-size: 14px !important;
+        }
+
+        .filter-checkbox:hover {
+            background: #f1f5f9 !important;
+        }
+
+        .filter-checkbox.active {
+            background: #2563eb !important;
+            color: white !important;
+        }
+
+        .filter-checkbox input {
+            margin-right: 8px !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+
+        .filter-actions {
+            margin-top: 24px !important;
+            padding-top: 24px !important;
+            border-top: 1px solid #e2e8f0 !important;
+        }
+
+        .filter-btn {
+            width: 100% !important;
+            padding: 12px !important;
+            margin-bottom: 8px !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            background: white !important;
+            cursor: pointer !important;
+            transition: all 200ms ease !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+        }
+
+        .filter-btn:hover {
+            background: #2563eb !important;
+            color: white !important;
+            border-color: #2563eb !important;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white !important;
+            border-radius: 20px !important;
+            padding: 40px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+        }
+
+
+        .results-info {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            margin-bottom: 24px !important;
+            padding: 16px 20px !important;
+            background: #f8fafc !important;
+            border-radius: 12px !important;
+            font-size: 14px !important;
+            color: #64748b !important;
+        }
+
+        .blog-grid {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+
+        .blog-card {
+            display: flex !important;
+            background: white !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            transition: all 300ms ease !important;
+            cursor: pointer !important;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .blog-card-image {
+            width: 150px !important;
+            height: 120px !important;
+            background: linear-gradient(135deg, #2563eb 0%, #f59e0b 100%) !important;
+            flex-shrink: 0 !important;
+        }
+
+        .blog-card-content {
+            padding: 20px !important;
+            flex: 1 !important;
+        }
+
+        .blog-card-title {
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            margin-bottom: 8px !important;
+            line-height: 1.3 !important;
+        }
+
+        .blog-card-excerpt {
+            color: #64748b !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+            margin-bottom: 12px !important;
+        }
+
+        .blog-card-meta {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            font-size: 12px !important;
+            color: #94a3b8 !important;
+        }
+
+        .blog-tag {
+            background: #f59e0b !important;
+            color: white !important;
+            padding: 4px 8px !important;
+            border-radius: 6px !important;
+            font-size: 11px !important;
+            font-weight: 500 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .blog-layout {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            .filter-sidebar {
+                position: static !important;
+                order: 2 !important;
+            }
+
+            .main-content {
+                order: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <!-- Blog Header -->
+        <div class="blog-header">
+            <h1 class="blog-title">Blog & Insights</h1>
+            <p class="blog-subtitle">Leadership thoughts, technical deep-dives, and strategic perspectives</p>
+        </div>
+
+        <div class="blog-layout">
+            <!-- Sidebar Filter -->
+            <div class="filter-sidebar">
+                <div class="filter-header">
+                    <h2 class="filter-title">
+                        <i data-lucide="filter" style="width: 20px; height: 20px;"></i>
+                        Filters
+                    </h2>
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search articles...">
+                        <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
+                    </div>
+                </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">
+                    <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
+                    Year
+                </h3>
+                <div class="filter-options">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="2024">
+                        <span>2024 (4 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="2023">
+                        <span>2023 (3 articles)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">
+                    <i data-lucide="file-type" style="width: 16px; height: 16px;"></i>
+                    Format
+                </h3>
+                <div class="filter-options">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Text Only">
+                        <span>Text Only (6 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Video">
+                        <span>Video (2 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Charts">
+                        <span>Charts (2 articles)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">
+                    <i data-lucide="tags" style="width: 16px; height: 16px;"></i>
+                    Topics
+                </h3>
+                <div class="filter-options">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Leadership">
+                        <span>Leadership (4 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Product">
+                        <span>Product (3 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="AI/ML">
+                        <span>AI/ML (2 articles)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" value="Data">
+                        <span>Data (3 articles)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="filter-btn">Clear All Filters</button>
+                <button class="filter-btn">Apply Filters</button>
+            </div>
+        </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="results-info">
+                    <span>Showing 6 of 6 articles</span>
+                    <span>Sort by: Most Recent</span>
+                </div>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-card-image"></div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">How ML Transformed Payment Success Rates by 23%</h3>
+                        <p class="blog-card-excerpt">Deep dive into implementing machine learning algorithms to optimize payment processing...</p>
+                        <div class="blog-card-meta">
+                            <span>Nov 2024</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                            <span class="blog-tag">AI/ML</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image"></div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Building High-Performance Teams in Remote-First Organizations</h3>
+                        <p class="blog-card-excerpt">Lessons from scaling global teams at Walmart and sticky.io, focusing on communication...</p>
+                        <div class="blog-card-meta">
+                            <span>Oct 2024</span>
+                            <span>•</span>
+                            <span>12 min read</span>
+                            <span class="blog-tag">Leadership</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image"></div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">The Product Analytics Stack That Drove $650M Revenue</h3>
+                        <p class="blog-card-excerpt">How we built a comprehensive analytics infrastructure to measure and optimize...</p>
+                        <div class="blog-card-meta">
+                            <span>Dec 2023</span>
+                            <span>•</span>
+                            <span>15 min read</span>
+                            <span class="blog-tag">Product</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Simple checkbox functionality
+        const checkboxes = document.querySelectorAll('.filter-checkbox input');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const label = e.target.closest('.filter-checkbox');
+                if (e.target.checked) {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            });
+        });
+
+        console.log('Blog Filter Variation 1 (Sidebar Layout) loaded successfully');
+    </script>
+</body>
+</html>
