@@ -11,14 +11,23 @@ from mangum import Mangum
 CURRENT_DIR = Path(__file__).parent
 BASE_DIR = CURRENT_DIR.parent
 
+# Debug: Print directory information
+print(f"CURRENT_DIR: {CURRENT_DIR}")
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"Templates dir: {BASE_DIR / 'templates'}")
+print(f"Data dir: {BASE_DIR / 'data'}")
+
+# Check if directories exist
+print(f"Templates exists: {(BASE_DIR / 'templates').exists()}")
+print(f"Data exists: {(BASE_DIR / 'data').exists()}")
+
 app = FastAPI(
     title="jambuilds.com - Professional Portfolio",
     description="Personal portfolio website showcasing leadership and technical expertise",
     version="1.0.0"
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+# Note: Static files are handled by Vercel automatically, no mounting needed in serverless functions
 
 # Set up templates
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -27,9 +36,14 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 def load_data(filename: str) -> dict:
     """Load YAML data file"""
     try:
-        with open(BASE_DIR / "data" / filename, "r") as file:
-            return yaml.safe_load(file)
-    except FileNotFoundError:
+        data_path = BASE_DIR / "data" / filename
+        print(f"Trying to load: {data_path}")  # Debug logging
+        with open(data_path, "r") as file:
+            data = yaml.safe_load(file)
+            print(f"Loaded {filename}: {type(data)}")  # Debug logging
+            return data or {}
+    except Exception as e:
+        print(f"Error loading {filename}: {e}")  # Debug logging
         return {}
 
 def get_site_config() -> dict:
@@ -66,13 +80,17 @@ def get_page_meta(page: str, config: dict) -> dict:
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    config = get_site_config()
-    meta = get_page_meta("home", config)
-    return templates.TemplateResponse("home.html", {
-        "request": request,
-        "meta": meta,
-        "config": config
-    })
+    try:
+        config = get_site_config()
+        meta = get_page_meta("home", config)
+        return templates.TemplateResponse("home.html", {
+            "request": request,
+            "meta": meta,
+            "config": config
+        })
+    except Exception as e:
+        print(f"Error in home route: {e}")
+        return HTMLResponse(f"<h1>Error loading home page: {e}</h1>", status_code=500)
 
 @app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
