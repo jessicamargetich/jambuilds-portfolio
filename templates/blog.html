@@ -40,37 +40,75 @@
     padding: 20px 32px;
     margin-bottom: 32px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap;
+    min-height: 48px;
 }
 
+.filter-controls-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+
+/* Search Bar */
 .search-container {
     flex: 1;
     min-width: 300px;
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    height: 48px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin: 0;
+    font-family: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 200ms ease;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
 }
 
 .search-input {
     width: 100%;
-    padding: 12px 50px 12px 20px;
-    border: 2px solid #e2e8f0;
+    height: 100%;
+    padding: 0 50px 0 16px;
+    border: none;
     border-radius: 12px;
     font-size: 16px;
-    transition: all 300ms ease;
-    background: #f8fafc;
-    height: 48px;
+    font-weight: 500;
+    background: transparent;
+    transition: all 200ms ease;
     box-sizing: border-box;
-    line-height: 1.2;
+    outline: none;
+    line-height: 1;
+    vertical-align: top;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    font-family: inherit;
+    display: block;
 }
 
-.search-input:focus {
-    outline: none;
+.search-container:focus-within {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
 }
 
 .search-icon {
@@ -79,24 +117,28 @@
     top: 50%;
     transform: translateY(-50%);
     color: #64748b;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .filter-controls {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin: 0;
 }
 
 .filter-dropdown {
     position: relative;
+    margin: 0;
 }
 
 .dropdown-trigger {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 20px;
+    padding: 0 20px;
     background: #f8fafc;
     border: 2px solid #e2e8f0;
     border-radius: 12px;
@@ -106,8 +148,14 @@
     white-space: nowrap;
     height: 48px;
     box-sizing: border-box;
-    line-height: 1.2;
-    min-height: 48px;
+    line-height: 1;
+    font-size: 16px;
+    vertical-align: top;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    font-family: inherit;
 }
 
 .dropdown-trigger:hover {
@@ -130,17 +178,19 @@
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border: 1px solid #e2e8f0;
     min-width: 250px;
-    z-index: 1000;
+    z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 300ms ease;
+    pointer-events: none;
 }
 
 .dropdown-menu.active {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto;
 }
 
 .dropdown-header {
@@ -196,6 +246,9 @@
     cursor: pointer;
     transition: all 200ms ease;
     font-size: 14px;
+    position: relative;
+    pointer-events: auto;
+    user-select: none;
 }
 
 .dropdown-option:hover {
@@ -212,6 +265,10 @@
     margin-right: 8px;
     width: 16px;
     height: 16px;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .dropdown-footer {
@@ -232,6 +289,9 @@
     transition: all 200ms ease;
     font-size: 14px;
     font-weight: 500;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .dropdown-btn:hover {
@@ -268,12 +328,61 @@
     transform: translateY(-1px);
 }
 
+.category-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.category-btn {
+    flex: 1;
+    padding: 6px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.category-btn:hover {
+    background: #f1f5f9;
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.category-btn.select-all {
+    color: #059669;
+    border-color: #d1fae5;
+}
+
+.category-btn.select-all:hover {
+    background: #ecfdf5;
+    border-color: #059669;
+}
+
+.category-btn.clear-all {
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.category-btn.clear-all:hover {
+    background: #fef2f2;
+    border-color: #dc2626;
+}
+
 .active-filters {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 0;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 .filter-tag {
@@ -307,6 +416,7 @@
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .blog-grid {
@@ -499,6 +609,8 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+/* Alignment is now fixed */
 </style>
 
 <div class="blog-container">
@@ -508,12 +620,13 @@
     </div>
 
     <div class="filter-bar">
-        <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search articles by title, content, or tags...">
-            <i data-lucide="search" class="search-icon" style="width: 20px; height: 20px;"></i>
-        </div>
+        <div class="filter-controls-row">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search articles by title, content, or tags...">
+                <i data-lucide="search" class="search-icon" style="width: 20px; height: 20px;"></i>
+            </div>
 
-        <div class="filter-controls">
+            <div class="filter-controls">
             <div class="filter-dropdown">
                 <div class="dropdown-trigger" data-dropdown="year">
                     <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
@@ -521,13 +634,12 @@
                     <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
                 </div>
                 <div class="dropdown-menu" data-menu="year">
-                    <div class="dropdown-header">
-                        <div class="dropdown-title">Filter by Year</div>
-                        <div class="dropdown-subtitle">Select publication years</div>
-                    </div>
                     <div class="dropdown-content">
                         <div class="dropdown-section">
-                            <div class="section-title">Publication Year</div>
+                            <div class="category-controls">
+                                <button class="category-btn select-all" data-category="year" data-action="select">Select All</button>
+                                <button class="category-btn clear-all" data-category="year" data-action="clear">Clear All</button>
+                            </div>
                             <div class="dropdown-options">
                                 {% for year in filter_options.years %}
                                 <label class="dropdown-option">
@@ -537,10 +649,6 @@
                                 {% endfor %}
                             </div>
                         </div>
-                    </div>
-                    <div class="dropdown-footer">
-                        <button class="dropdown-btn">Clear</button>
-                        <button class="dropdown-btn primary">Apply</button>
                     </div>
                 </div>
             </div>
@@ -552,13 +660,12 @@
                     <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
                 </div>
                 <div class="dropdown-menu" data-menu="format">
-                    <div class="dropdown-header">
-                        <div class="dropdown-title">Filter by Format</div>
-                        <div class="dropdown-subtitle">Select content types</div>
-                    </div>
                     <div class="dropdown-content">
                         <div class="dropdown-section">
-                            <div class="section-title">Content Type</div>
+                            <div class="category-controls">
+                                <button class="category-btn select-all" data-category="format" data-action="select">Select All</button>
+                                <button class="category-btn clear-all" data-category="format" data-action="clear">Clear All</button>
+                            </div>
                             <div class="dropdown-options">
                                 {% for format in filter_options.content_formats %}
                                 <label class="dropdown-option">
@@ -568,10 +675,6 @@
                                 {% endfor %}
                             </div>
                         </div>
-                    </div>
-                    <div class="dropdown-footer">
-                        <button class="dropdown-btn">Clear</button>
-                        <button class="dropdown-btn primary">Apply</button>
                     </div>
                 </div>
             </div>
@@ -583,13 +686,12 @@
                     <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
                 </div>
                 <div class="dropdown-menu" data-menu="topic">
-                    <div class="dropdown-header">
-                        <div class="dropdown-title">Filter by Topic</div>
-                        <div class="dropdown-subtitle">Select areas of focus</div>
-                    </div>
                     <div class="dropdown-content">
+                        <div class="category-controls">
+                            <button class="category-btn select-all" data-category="theme" data-action="select">Select All</button>
+                            <button class="category-btn clear-all" data-category="theme" data-action="clear">Clear All</button>
+                        </div>
                         <div class="dropdown-section">
-                            <div class="section-title">Business</div>
                             <div class="dropdown-options">
                                 {% for theme in filter_options.themes %}
                                 {% if theme in ['Leadership', 'Strategy', 'Process', 'Transformation'] %}
@@ -602,7 +704,6 @@
                             </div>
                         </div>
                         <div class="dropdown-section">
-                            <div class="section-title">Technical</div>
                             <div class="dropdown-options">
                                 {% for theme in filter_options.themes %}
                                 {% if theme in ['Product', 'AI/ML', 'Data'] %}
@@ -615,20 +716,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dropdown-footer">
-                        <button class="dropdown-btn">Clear</button>
-                        <button class="dropdown-btn primary">Apply</button>
-                    </div>
                 </div>
             </div>
 
-            <button class="filter-button">
-                <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i>
-                More Filters
-            </button>
+        </div>
         </div>
 
-        <div class="active-filters" id="activeFilters" style="display: none;">
+        <div class="active-filters" id="activeFilters">
             <span style="font-size: 14px; color: #64748b; font-weight: 500;">Active filters:</span>
             <button class="clear-all-btn">Clear All</button>
         </div>
@@ -747,13 +841,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        dropdownMenus.forEach(menu => {
-            menu.classList.remove('active');
-            menu.previousElementSibling.classList.remove('active');
-        });
-    });
 
     // Prevent dropdown close when clicking inside
     dropdownMenus.forEach(menu => {
@@ -768,57 +855,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-            const value = e.target.value;
-            const label = e.target.nextElementSibling.textContent;
-
-            if (e.target.checked) {
-                activeFilters.push({ value, label });
-                e.target.closest('.dropdown-option').classList.add('active');
-            } else {
-                activeFilters = activeFilters.filter(f => f.value !== value);
-                e.target.closest('.dropdown-option').classList.remove('active');
-            }
-
+            e.target.closest('.dropdown-option').classList.toggle('active', e.target.checked);
             updateActiveFilters();
             applyFilters();
         });
     });
 
-    // Handle dropdown Clear/Apply buttons
-    document.querySelectorAll('.dropdown-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const dropdown = e.target.closest('.dropdown-menu');
-            const dropdownType = dropdown.getAttribute('data-menu');
-
-            if (e.target.textContent.trim() === 'Clear') {
-                // Clear all checkboxes in this dropdown
-                const dropdownCheckboxes = dropdown.querySelectorAll('input[type="checkbox"]');
-                dropdownCheckboxes.forEach(cb => {
-                    cb.checked = false;
-                    cb.closest('.dropdown-option').classList.remove('active');
-                    // Remove from activeFilters
-                    activeFilters = activeFilters.filter(f => f.value !== cb.value);
-                });
-            } else if (e.target.textContent.trim() === 'Apply') {
-                // Close the dropdown
-                dropdown.classList.remove('active');
-                dropdown.previousElementSibling.classList.remove('active');
-            }
-
-            updateActiveFilters();
-            applyFilters();
-        });
+    // Auto-apply filters when dropdowns close
+    document.addEventListener('click', (e) => {
+        // If clicking outside dropdown, close it
+        if (!e.target.closest('.filter-dropdown')) {
+            dropdownMenus.forEach(menu => {
+                menu.classList.remove('active');
+                menu.previousElementSibling.classList.remove('active');
+            });
+        }
     });
 
     function updateActiveFilters() {
-        if (activeFilters.length > 0) {
-            activeFiltersContainer.style.display = 'flex';
-            const existingTags = activeFiltersContainer.querySelectorAll('.filter-tag');
-            existingTags.forEach(tag => tag.remove());
+        // Rebuild activeFilters array - only include categories with partial selection
+        activeFilters = [];
 
+        // Check each filter category independently
+        const categories = ['year', 'format', 'theme'];
+
+        categories.forEach(category => {
+            const categoryCheckboxes = Array.from(checkboxes).filter(cb => cb.dataset.filter === category);
+            const totalInCategory = categoryCheckboxes.length;
+            const checkedInCategory = categoryCheckboxes.filter(cb => cb.checked).length;
+
+            // Only include this category's active filters if some (but not all) are checked
+            if (checkedInCategory > 0 && checkedInCategory < totalInCategory) {
+                categoryCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const label = checkbox.nextElementSibling.textContent;
+                        activeFilters.push({ value: checkbox.value, label });
+                    }
+                });
+            }
+        });
+
+        // Always show active filters section
+        activeFiltersContainer.style.display = 'flex';
+        const existingTags = activeFiltersContainer.querySelectorAll('.filter-tag, .no-filters-indicator');
+        existingTags.forEach(tag => tag.remove());
+
+        if (activeFilters.length > 0) {
             activeFilters.forEach(filter => {
                 const tag = document.createElement('div');
                 tag.className = 'filter-tag';
@@ -833,7 +915,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             lucide.createIcons();
         } else {
-            activeFiltersContainer.style.display = 'none';
+            // Show "None" indicator when no active filters
+            const noneIndicator = document.createElement('span');
+            noneIndicator.className = 'no-filters-indicator';
+            noneIndicator.style.cssText = 'color: #94a3b8; font-style: italic; font-size: 14px;';
+            noneIndicator.textContent = 'None';
+            activeFiltersContainer.insertBefore(noneIndicator, activeFiltersContainer.lastElementChild);
         }
     }
 
@@ -852,7 +939,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearAllBtn = document.querySelector('.clear-all-btn');
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
-            activeFilters = [];
             checkboxes.forEach(checkbox => {
                 checkbox.checked = true;
                 checkbox.closest('.dropdown-option').classList.remove('active');
@@ -862,6 +948,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Category control buttons (Select All / Clear All for each category)
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const category = e.target.dataset.category;
+            const action = e.target.dataset.action;
+
+            // Find all checkboxes in this category
+            const categoryCheckboxes = Array.from(checkboxes).filter(cb => cb.dataset.filter === category);
+
+            // Set all checkboxes in this category based on action
+            categoryCheckboxes.forEach(checkbox => {
+                checkbox.checked = (action === 'select');
+                checkbox.closest('.dropdown-option').classList.toggle('active', checkbox.checked);
+            });
+
+            updateActiveFilters();
+            applyFilters();
+        });
+    });
+
     // Apply filters function
     function applyFilters(searchQuery = '') {
         const selectedFilters = {
@@ -870,9 +978,9 @@ document.addEventListener('DOMContentLoaded', function() {
             theme: []
         };
 
-        // Collect only unchecked filters (unchecked means exclude)
+        // Collect checked filters (checked means include)
         checkboxes.forEach(checkbox => {
-            if (!checkbox.checked) {
+            if (checkbox.checked) {
                 const filterType = checkbox.dataset.filter;
                 if (!selectedFilters[filterType]) selectedFilters[filterType] = [];
                 selectedFilters[filterType].push(checkbox.value);
@@ -887,13 +995,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const cardThemes = card.dataset.themes.split(',').map(t => t.trim());
             const cardText = card.textContent.toLowerCase();
 
-            // Check if card should be excluded (filtered out)
-            const yearExcluded = selectedFilters.year.includes(cardYear);
-            const formatExcluded = selectedFilters.format.some(f => cardFormats.includes(f));
-            const themeExcluded = selectedFilters.theme.some(t => cardThemes.includes(t));
+            // Check if card matches selected filters (inclusion logic)
+            const yearMatch = selectedFilters.year.length === 0 || selectedFilters.year.includes(cardYear);
+            const formatMatch = selectedFilters.format.length === 0 || selectedFilters.format.some(f => cardFormats.includes(f));
+            const themeMatch = selectedFilters.theme.length === 0 || selectedFilters.theme.some(t => cardThemes.includes(t));
             const searchMatch = searchQuery === '' || cardText.includes(searchQuery.toLowerCase());
 
-            const shouldShow = !yearExcluded && !formatExcluded && !themeExcluded && searchMatch;
+            const shouldShow = yearMatch && formatMatch && themeMatch && searchMatch;
 
             if (shouldShow) {
                 card.style.display = 'block';
@@ -924,19 +1032,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with all filters selected
     applyFilters();
 
-    // Test basic dropdown functionality
-    setTimeout(() => {
-        console.log('Testing dropdown functionality...');
-        const firstTrigger = document.querySelector('.dropdown-trigger');
-        const firstMenu = document.querySelector('.dropdown-menu');
-        if (firstTrigger && firstMenu) {
-            console.log('Found first trigger and menu, testing click...');
-            firstTrigger.click();
-            setTimeout(() => {
-                console.log('Menu active after click:', firstMenu.classList.contains('active'));
-            }, 100);
-        }
-    }, 1000);
 
     console.log('Blog Filter Variation 3 (Dropdown/Modal Layout) loaded successfully');
 });
